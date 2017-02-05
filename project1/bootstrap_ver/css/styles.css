@@ -1,3 +1,4 @@
+/*my favorite google font..*/
 body
 {
    font-family: "Roboto" !important;
@@ -8,7 +9,7 @@ body
     padding: 40px 40px 10px;
 }
 
-/*login form thing, keep the damn thing centered*/
+/*login form thing, keep the damn thing centered w right amount of padding/margin*/
 .card {
     background-color: #F7F7F7;
     padding: 20px 25px 30px;
@@ -181,7 +182,7 @@ body
         width: 40px; 
     }
 
-#wrapper.toggled span {
+    #wrapper.toggled span {
         visibility:hidden;   
     }
 
@@ -248,3 +249,7 @@ body
     padding-top: 5%;
 }
 
+/*override the color to my favorite crappy brown looking one*/
+.custom-active-state {
+    background: #312A25;
+}
