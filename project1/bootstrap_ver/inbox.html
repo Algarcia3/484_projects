@@ -11,12 +11,12 @@
   <!-- my own CSS if I have to override some changes I don't like -->
 	<link rel="stylesheet" type="text/css" href="css/styles.css">
   <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Roboto:400,500,700,300,100">
 </head>
-<body>
-<!-- rest of the code goes here... -->
 
+<!-- body content -->
+<body>
 <!-- top navigation bar -->
-<!-- Image and text -->
 <nav class="navbar navbar-toggleable-md navbar-light bg-faded">
   <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -42,7 +42,7 @@
 <div id="sidebar-wrapper">
   <ul class="sidebar-nav" style="margin-left:0;">
     <li class="sidebar-brand"></li>
-    <li>
+      <li>
           <a href="#"><i class="fa fa-plus " aria-hidden="true"> </i> <span style="margin-left:10px;"> New Message</span>
           </a>
       </li>
@@ -55,17 +55,18 @@
       </li>
       <li>
           <a href="#"> <i class="fa fa-trash-o" aria-hidden="true"> </i> <span style="margin-left:10px;"> Trash</span><span class="badge trashbadge">2</span> </a>
-        </li>
+      </li>
     </ul>
 </div>
 
 <!-- main view for inbox -->
 <div id="inbox-section">
 <h1>Inbox</h1>
-    <div class="mail-row">
-        <table class="table table-hover">
+<!-- email table crap -->
+<table width="400px" class="table table-hover">
     <thead>
         <tr>
+            <th></th>
             <th>Sender</th>
             <th>Title</th>
             <th>Received</th>
@@ -73,33 +74,37 @@
     </thead>
     <tbody>
         <tr class="active">
+            <td><input type="checkbox"/></td>
             <td>sfitzgerald@gmail.com</td>
             <td>FUCK</td>
             <td>04/07/2014</td>
         </tr>
         <tr class="success">
+            <td><input type="checkbox" /></td>
             <td>brando@bran.com</td>
             <td>wtf u doign 2nit/??</td>
             <td>01/07/2014</td>
         </tr>
         <tr class="info">
+            <td><input type="checkbox" /></td>
             <td>test@test.com</td>
             <td>fuk u</td>
             <td>05/07/2014</td>
         </tr>
         <tr class="warning">
+            <td><input type="checkbox" /></td>
             <td>matt.fritz@darpa.gov</td>
             <td>CONFIDENTIAL</td>
             <td>03/07/2014</td>
         </tr>
         <tr class="danger">
+            <td><input type="checkbox" /></td>
             <td>test2@go.com</td>
             <td>BILL DUEE!!!!</td>
             <td>06/07/2014</td>
         </tr>
     </tbody>
 </table>
-    </div>
 
 </div>
 
