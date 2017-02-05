@@ -231,6 +231,10 @@ body
 
 }
 
+.table {
+    width: 95%;
+}
+
 .badge {
     color: red;
     padding-left: 21%;
