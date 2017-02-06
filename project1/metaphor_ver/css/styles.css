@@ -19,8 +19,8 @@
 
 /*center the img*/
 .logo-img {
-    width: 96px;
-    height: 96px;
+    width: 150px;
+    height: 150px;
     margin: 0 auto 10px;
     display: block;
 }
@@ -98,7 +98,7 @@
     margin-left:-250px;
 }
 
-/* Sidebar Styles */
+/* Sidebar stuff, decided to make my own */
 
 .sidebar-nav {
     position: absolute;
@@ -124,7 +124,7 @@
 .sidebar-nav li a:hover {
     text-decoration: none;
     color: #fff;
-    background: #312A25;
+    background: #333333;
 }
 
 .navbar-nav {
@@ -160,7 +160,7 @@
     background: none;
 }
 
-/*media query for mobile responsiveness... not putting a big focus here*/
+/*media query for mobile responsiveness... not putting a big focus here gave up on it lol*/
 @media(min-width:768px) {
     #wrapper {
         padding-left: 220px;
@@ -233,7 +233,7 @@
 
 .badge {
     color: red;
-    padding-left: 21%;
+    padding-left: 23%;
 }
 
 .spambadge {
@@ -241,7 +241,7 @@
 }
 
 .trashbadge {
-    padding-left: 24%;
+    padding-left: 26%;
 }
 
 #inbox-section {
@@ -249,9 +249,9 @@
     padding-top: 5%;
 }
 
-/*override the color to my favorite crappy brown looking one*/
+/*override the color to my favorite crappy gray looking one*/
 .custom-active-state {
-    background: #312A25;
+    background: #333333;
 }
 
 .table {
@@ -263,7 +263,11 @@
     margin: 0;
     padding: 0;
     background-color: #191919;
-    position: fixed; /* Set the navbar to fixed position */
-    top: 0; /* Position the navbar at the top of the page */
-    width: 100%; /* Full width */
+    position: fixed; /* dont move */
+    top: 0; /* all the way to the top baby */
+    width: 100%; /* full width from end to end*/
+}
+
+.alert--success {
+    background-color: #47ef85;
 }

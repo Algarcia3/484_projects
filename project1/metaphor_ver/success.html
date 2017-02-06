@@ -43,11 +43,11 @@
 </a>
   <ul class="sidebar-nav" style="padding-top: 8%">
     <li class="sidebar-brand"></li>
-      <li>
+      <li class="custom-active-state">
           <a href="compose_message.html"><i class="fa fa-plus " aria-hidden="true"> </i> <span style="margin-left:10px;"> New Message</span>
           </a>
       </li>
-      <li class="custom-active-state">
+      <li>
           <a href="inbox.html"><i class="fa fa-envelope " aria-hidden="true"> </i> <span style="margin-left:10px;"> Inbox</span>
           <span class="badge">5</span></a>
       </li>
@@ -62,74 +62,14 @@
 
 <!-- main view for inbox -->
 <div id="inbox-section">
-<h1>Inbox</h1>
-<!-- email table crap -->
-<table class="table table--underlined table--padded table--hover" style="width: 95%">
-    <thead>
-        <tr>
-            <th></th>
-            <th>Sender</th>
-            <th>Title</th>
-            <th>Received</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr style="font-weight:bold">
-            <td><input type="checkbox"/></td>
-            <td>sfitzgerald@gmail.com</td>
-            <td>FUCK</td>
-            <td>12/07/2014</td>
-        </tr>
-        <tr style="font-weight:bold">
-            <td><input type="checkbox" /></td>
-            <td>brando@bran.com</td>
-            <td>wtf u doign 2nit/??</td>
-            <td>09/24/2014</td>
-        </tr>
-        <tr style="font-weight:bold">
-            <td><input type="checkbox" /></td>
-            <td>joseph@oreilly.com</td>
-            <td>NEW PARTS!!!!</td>
-            <td>09/24/2014</td>
-        </tr>
-        <tr style="font-weight:bold">
-            <td><input type="checkbox" /></td>
-            <td>matthew.fritz@darpa.gov</td>
-            <td>CONFIDENTIAL</td>
-            <td>03/07/2014</td>
-        </tr>
-        <tr style="font-weight:bold">
-            <td><input type="checkbox" /></td>
-            <td>services@tmobile.com</td>
-            <td>BILL DUEE!!!!</td>
-            <td>01/07/2014</td>
-        </tr>
-        <tr>
-            <td><input type="checkbox" /></td>
-            <td>frontdesk@meridianpointe.com</td>
-            <td>**Eviction Notice**</td>
-            <td>12/11/2013</td>
-        </tr>
-        <tr>
-            <td><input type="checkbox" /></td>
-            <td>central_it@csun.edu</td>
-            <td>Account Suspension</td>
-            <td>11/11/2013</td>
-        </tr>
-    </tbody>
-</table>
 
-<!-- functionality buttons for deletion, mark as read, etc.-->
-<button type="button" class="btn btn-default">
-  <i class="fa fa-eye" aria-hidden="true"> </i> Mark As Read
-</button>
-<button type="button" class="btn btn-warning">
-  <i class="fa fa-ban" aria-hidden="true"> </i> Mark As Spam
-</button>
-<button type="button" class="btn btn-danger">
-  <i class="fa fa-trash-o" aria-hidden="true"> </i> Delete
-</button>
-
+<!-- fuck that weird looking green color, this one's easier on the eyes imo -->
+<div style="width: 90%; background-color: #47ef85" class="alert alert--success">
+  <strong>Success!</strong> Message successfully sent.<br>
+  <br>
+  <a href="inbox.html">Return to your inbox</a> or 
+  <a href="compose_message.html">send another message.</a>
+</div>
 
 </div>
 
