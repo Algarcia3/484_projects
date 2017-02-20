@@ -1,5 +1,13 @@
 /*center the buttons to the center of the browser*/
-.center {
-	padding-top: 30%;
+.center-alphabet {
 	text-align: center;
 }
+
+.move-bot {
+	top: 400px;
+}
+
+.move-above {
+	top: 380px;
+}
+
