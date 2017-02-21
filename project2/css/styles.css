@@ -14,10 +14,18 @@
 .move-losetext {
 	position: absolute;
 	top: 400px;
-	left: 900px;
+	left: 41%;
 	font-size: 50px;
 }
 
 #winorlose {
 	position: relative;
+}
+
+#miss-counter {
+	position: relative;
+}
+
+.misses {
+	font-size: 20px;
 }
