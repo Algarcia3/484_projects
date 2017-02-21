@@ -1,13 +1,13 @@
 $(document).ready(function() {
-	var easyWords = ["BRANDON", "ALFREDO", "JONAS", "LOLOLOLOLOLOLOL", "MATT"];
+	var allWords = ["BRANDON", "ALFREDO", "JONAS", "LOLOLOLOLOLOLOL", "MATT"];
 	var lettersMissed = 0;
 
 		// getting random word from array, only from a specific index in a specific range
-		var warrLength = easyWords.length;
+		var warrLength = allWords.length;
 		var randNum = Math.floor(Math.random() * (warrLength - 0)) + 0;
 
 		// now split the random word and look at the chars
-		var randWord = easyWords[randNum];
+		var randWord = allWords[randNum];
 		var splitWord = randWord.split('');
 
 		// generate the amount of placeholders based on amount of letters
@@ -35,8 +35,11 @@ $(document).ready(function() {
 				console.log("Letters Missed: " + lettersMissed);
 				$(this).addClass("disabled");
 				// if the letters missed exceed 7, kill it dawg
-				if(lettersMissed == 7) {
-					
+				if(lettersMissed == 2) {
+					document.getElementById('winorlose').innerHTML
+					+= '<a class="move-losetext">You Lose!!!</a>';
+					// disable all buttons upon failing...
+					$('div#hangman-buttons a').addClass('disabled');
 				}
 			}
 		});

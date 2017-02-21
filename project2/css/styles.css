@@ -4,10 +4,20 @@
 }
 
 .move-bot {
-	top: 400px;
+	top: 500px;
 }
 
 .move-above {
-	top: 380px;
+	top: 480px;
 }
 
+.move-losetext {
+	position: absolute;
+	top: 400px;
+	left: 900px;
+	font-size: 50px;
+}
+
+#winorlose {
+	position: relative;
+}
