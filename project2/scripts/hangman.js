@@ -1,6 +1,6 @@
 $(document).ready(function() {
 	// letters must be in all caps, i don't really care about case sensitivity
-	var allWords = ["BRANDON", "ALFREDO", "JONAS", "LOLOLOLOLOLOLOL", "MATT"];
+	var allWords = ["BRANDON", "TEST", "CITRULEZ", "LOLOLOLOLOLOLOL", "MATT", "DEADBEEF", "ANOTHERTEST"];
 	var lettersMissed = 0;
 
 		// getting random word from array, from the maximum index of array 
@@ -39,13 +39,13 @@ $(document).ready(function() {
 				*/
 				var ph = $('div#placeholders a').text();
 				if (ph.length == splitWord.length) {
-					// generate the winning text
+					// generate the winning text and reload button
 					document.getElementById('winorlose').innerHTML
 					+= '<a class="move-losetext successtext">You Win!!!</a>' + 
 						'<a id="restart-game" class="waves-effect waves-light btn-floating btn-large move-replay">' +
 						'<i class="material-icons">replay</i>' +
 						'</a>';
-
+					// bind event to refresh page
 					$("#restart-game").click(function() {
 							location.reload();
 					});
