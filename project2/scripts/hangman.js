@@ -1,6 +1,6 @@
 $(document).ready(function() {
-	var easyWords = ["foo", "barr", "testt", "othertest", "matt"];
-	const lettersMissed = 0;
+	var easyWords = ["FOO", "BARR", "TEST", "MATTSUCKS", "ORNOT"];
+	var lettersMissed = 0;
 
 		// getting random word from array, only from a specific index in a specific range
 		var warrLength = easyWords.length;
@@ -20,7 +20,18 @@ $(document).ready(function() {
 		$("div .move-bot").click(function() {
 			// just want the text, none of that other bullshit
 			var buttonAnswer = $(this).text();
-			
-		});
+			console.log("your word is: " + splitWord);
 
+			if($.inArray(buttonAnswer, splitWord) != -1) {
+				console.log("ITS IN THERE");
+				$(this).addClass("disabled");
+				
+			} else {
+				// increment counter disable button and add a miss
+				console.log("no lol");
+				lettersMissed++;
+				console.log("Letters Missed: " + lettersMissed);
+				$(this).addClass("disabled");
+			}
+		});
 });
