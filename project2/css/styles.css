@@ -33,3 +33,13 @@
 #hanging-man {
 	padding-left: 35%;
 }
+
+.move-replay {
+	position: absolute;
+	top: 57px;
+	left: 60%;
+}
+
+.failtext {
+	color: red;
+}

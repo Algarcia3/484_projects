@@ -41,7 +41,14 @@ $(document).ready(function() {
 				if (ph.length == splitWord.length) {
 					// generate the winning text
 					document.getElementById('winorlose').innerHTML
-					+= '<a class="move-losetext">You Win!!!</a>';
+					+= '<a class="move-losetext successtext">You Win!!!</a>' + 
+						'<a id="restart-game" class="waves-effect waves-light btn-floating btn-large move-replay">' +
+						'<i class="material-icons">replay</i>' +
+						'</a>';
+
+					$("#restart-game").click(function() {
+							location.reload();
+					});
 					// disable the buttons after win
 					$('div#hangman-buttons a').addClass('disabled');
 				}
@@ -187,8 +194,16 @@ $(document).ready(function() {
           ||
           ===========================
       </pre>`;
+      					// generate loser message and render the replay button
 						document.getElementById('winorlose').innerHTML
-						+= '<a class="move-losetext">You Lose!!!</a>';
+						+= '<a class="move-losetext failtext">You Lose!!!</a>' + 
+						'<a id="restart-game" class="waves-effect waves-light btn-floating btn-large move-replay">' +
+						'<i class="material-icons">replay</i>' +
+						'</a>';
+						// bind reload page event to retry button
+						$("#restart-game").click(function() {
+							location.reload();
+						});
 						// disable all buttons upon failing
 						$('div#hangman-buttons a').addClass('disabled');
 						break;
