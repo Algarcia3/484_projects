@@ -4,16 +4,16 @@
 }
 
 .move-bot {
-	top: 500px;
+	top: 150px;
 }
 
 .move-above {
-	top: 480px;
+	top: 135px;
 }
 
 .move-losetext {
 	position: absolute;
-	top: 400px;
+	top: 50px;
 	left: 41%;
 	font-size: 50px;
 }
@@ -28,4 +28,8 @@
 
 .misses {
 	font-size: 20px;
+}
+
+#hanging-man {
+	padding-left: 35%;
 }

@@ -1,4 +1,5 @@
 $(document).ready(function() {
+	// letters must be in all caps, i don't really care about case sensitivity
 	var allWords = ["BRANDON", "ALFREDO", "JONAS", "LOLOLOLOLOLOLOL", "MATT"];
 	var lettersMissed = 0;
 
@@ -13,14 +14,17 @@ $(document).ready(function() {
 		// generate the amount of placeholders based on amount of letters
 		for(var i = 0; i < splitWord.length; i++) {
 			document.getElementById('placeholders').innerHTML 
-			+= '<a id='+i+' class="waves-effect waves-light btn-floating disabled move-above"></a>';
+			+= '<a id='+ i +' class="waves-effect waves-light btn-floating disabled move-above"></a>';
 		}
 		
 		// now for the rest of that logic...
 		$("div .move-bot").click(function() {
 			// just want the text, none of that other bullshit
 			var buttonAnswer = $(this).text();
-			// logic for whether the guess was right or not
+			/* 
+				if the letter is in our word, then disable the button and iterate through placeholders,
+				and add in the corresponding letters to the placeholder. 
+			*/
 			if($.inArray(buttonAnswer, splitWord) != -1) {
 				$(this).addClass("disabled");
 				for(var i = 0; i < splitWord.length; i++) {
@@ -28,7 +32,11 @@ $(document).ready(function() {
 						document.getElementById(i).innerHTML += splitWord[i];
 					}
 				}
-				// compare lengths of text to placeholders; if the amount matches the amount of letters, you win.
+
+				/* 
+					compare lengths of text in placeholders to the actual length of the word; 
+					if the amount matches the amount of letters, you win. 
+				*/
 				var ph = $('div#placeholders a').text();
 				if (ph.length == splitWord.length) {
 					// generate the winning text
@@ -41,13 +49,152 @@ $(document).ready(function() {
 				// increment counter disable button and add a miss
 				lettersMissed++;
 				$(this).addClass("disabled");
-				document.getElementById("miss-counter").innerHTML = "<p class='misses'>Misses: " + lettersMissed + "/7</p>";
-				// if 7 letters were missed, kill it dawg
-				if(lettersMissed == 7) {
-					document.getElementById('winorlose').innerHTML
-					+= '<a class="move-losetext">You Lose!!!</a>';
-					// disable all buttons upon failing...
-					$('div#hangman-buttons a').addClass('disabled');
+				document.getElementById("miss-counter").innerHTML 
+				= "<p class='misses'>Misses: " + lettersMissed + "/7</p>";
+
+				// constructing the hanging man... looks fucking disgusting
+				switch(lettersMissed) {
+					case 1:
+						document.getElementById("hanging-man").
+						innerHTML = `<pre>
+          ||--------------
+          ||             |
+          ||
+          ||
+          ||
+          ||
+          ||
+          ||
+          ||
+          ||
+          ||
+          ||
+          ||
+          ===========================
+      </pre>`;
+					break;
+					case 2:
+						document.getElementById("hanging-man").
+						innerHTML = `<pre>
+          ||--------------
+          ||             |
+          ||             |
+          ||
+          ||
+          ||
+          ||
+          ||
+          ||
+          ||
+          ||
+          ||
+          ||
+          ===========================
+      </pre>`;
+					break;
+					case 3:
+						document.getElementById("hanging-man").
+						innerHTML = `<pre>
+          ||--------------
+          ||             |
+          ||             |
+          ||             O
+          ||
+          ||
+          ||
+          ||
+          ||
+          ||
+          ||
+          ||
+          ||
+          ===========================
+      </pre>`;
+					break;
+					case 4:
+						document.getElementById("hanging-man").
+						innerHTML = `<pre>
+          ||--------------
+          ||             |
+          ||             |
+          ||             O
+          ||             |
+          ||
+          ||
+          ||
+          ||
+          ||
+          ||
+          ||
+          ||
+          ===========================
+      </pre>`;
+					break;
+					case 5:
+						document.getElementById("hanging-man").
+						innerHTML = `<pre>
+          ||--------------
+          ||             |
+          ||             |
+          ||            `+'\\'+`O/
+          ||             |
+          ||
+          ||
+          ||
+          ||
+          ||
+          ||
+          ||
+          ||
+          ===========================
+      </pre>`;
+					break;
+					case 6:
+						document.getElementById("hanging-man").
+						innerHTML = `<pre>
+          ||--------------
+          ||             |
+          ||             |
+          ||            `+'\\'+`O/
+          ||             |
+          ||            /
+          ||
+          ||
+          ||
+          ||
+          ||
+          ||
+          ||
+          ===========================
+      </pre>`;
+					break;
+					case 7:
+						// add the last part of the hangman
+						document.getElementById("hanging-man").
+						innerHTML = `<pre>
+          ||--------------
+          ||             |
+          ||             |
+          ||            `+'\\'+`O/
+          ||             |
+          ||            / `+'\\'+`
+          ||
+          ||
+          ||
+          ||
+          ||
+          ||
+          ||
+          ===========================
+      </pre>`;
+						document.getElementById('winorlose').innerHTML
+						+= '<a class="move-losetext">You Lose!!!</a>';
+						// disable all buttons upon failing
+						$('div#hangman-buttons a').addClass('disabled');
+						break;
+					default:
+						// hopefully this never gets triggered lmao
+						console.log("error");
 				}
 			}
 		});
