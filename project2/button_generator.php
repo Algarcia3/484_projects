@@ -1,6 +1,6 @@
 <?php
 
-/*too fuckin lazy to print out all of the buttons*/
+/*too fuckin lazy to write the buttons in the alphabet by hand*/
 
 $alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"; 
 
