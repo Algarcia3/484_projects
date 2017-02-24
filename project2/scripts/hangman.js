@@ -38,6 +38,7 @@ $(document).ready(function() {
 					if the amount matches the amount of letters, you win. 
 				*/
 				var ph = $('div#placeholders a').text();
+				console.log(ph);
 				if (ph.length == splitWord.length) {
 					// generate the winning text and reload button
 					document.getElementById('winorlose').innerHTML
@@ -200,6 +201,10 @@ $(document).ready(function() {
 						'<a id="restart-game" class="waves-effect waves-light btn-floating btn-large move-replay">' +
 						'<i class="material-icons">replay</i>' +
 						'</a>';
+
+						for(var i = 0; i < splitWord.length; i++) {
+							document.getElementById(i).innerHTML = splitWord[i];
+						}
 						// bind reload page event to retry button
 						$("#restart-game").click(function() {
 							location.reload();
