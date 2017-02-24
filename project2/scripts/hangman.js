@@ -202,6 +202,7 @@ $(document).ready(function() {
 						'<i class="material-icons">replay</i>' +
 						'</a>';
 
+						// display the winning word, that would have won the game
 						for(var i = 0; i < splitWord.length; i++) {
 							document.getElementById(i).innerHTML = splitWord[i];
 						}
