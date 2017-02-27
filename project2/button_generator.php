@@ -10,3 +10,5 @@ foreach($charArray as $chars) {
 	// woo all the buttons
 	echo '<a class="center waves-effect waves-light btn-floating">' . $chars . '</a>' . "\n";
 }
+
+?>
