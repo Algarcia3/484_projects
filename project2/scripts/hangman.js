@@ -16,7 +16,7 @@ $(document).ready(function() {
 			document.getElementById('placeholders').innerHTML 
 			+= '<a id='+ i +' class="waves-effect waves-light btn-floating disabled move-above"></a>';
 		}
-		
+
 		// now for the rest of that logic...
 		$("div .move-bot").click(function() {
 			// just want the text, none of that other bullshit
