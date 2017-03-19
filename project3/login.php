@@ -1,7 +1,3 @@
-<?php
-echo "hello wold";
-?>
-
 <!DOCTYPE html>
 <html>
 <head>
