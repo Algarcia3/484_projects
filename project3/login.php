@@ -19,8 +19,8 @@
     <span class="navbar-toggler-icon"></span>
   </button>
   <a class="navbar-brand" href="index.html">
-    <img src="images/mailman.svg" width="30" height="30" class="d-inline-block align-top" alt="">
-    Mailman
+    <img src="images/coffee.svg" width="30" height="30" class="d-inline-block align-top" alt="">
+    Tsarbucks
   </a>
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav">
@@ -38,8 +38,8 @@
 
 <div class="container">
     <div class="card card-container">
-        <img class=logo-img src="images/mailman.svg" width="30" height="30" class="d-inline-block align-top" alt="">
-        <p class=sign-in-text>Sign in to Mailman</p>
+        <img class=logo-img src="images/coffee.svg" width="30" height="30" class="d-inline-block align-top" alt="">
+        <p class=sign-in-text>Sign in to Tsarbucks</p>
         <form class="form-signin" action="inbox.html" method="get">
             <input type="email" id="inputEmail" class="form-control" placeholder="E-Mail" required autofocus>
             <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
