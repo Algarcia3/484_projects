@@ -27,6 +27,37 @@ body
     display: block;
 }
 
+
+/* fuck css */
+.navbar-light .navbar-brand, .navbar-light .navbar-toggler .nav-link {
+    color: white;
+}
+
+.navbar-light .navbar-nav .nav-link {
+    color: white;
+}
+
+.navbar-light .navbar-nav .active>.nav-link, 
+.navbar-light .navbar-nav .nav-link.active, 
+.navbar-light .navbar-nav .nav-link.open, 
+.navbar-light .navbar-nav .open>.nav-link {
+    color: white;
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #006341;
+}
+
+.btn-primary:hover {
+    color: #fff;
+    background-color: #00452D;
+}
+
+.bg-faded {
+    background-color: #006341;
+}
+
 /*consistency with the text boxes for signing in*/
 .form-signin #inputEmail,
 .form-signin #inputPassword {
@@ -226,7 +257,7 @@ body
     #wrapper.toggled #sidebar-wrapper {
         width: 140px;     
     }
-
+.
 }
 
 .table {
