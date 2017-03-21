@@ -2,7 +2,8 @@
 include "app/databaseHandler.php";
 include "app/loginHandler.php";
 
-
+$login = new loginHandler();
+$login->loginAttempt();
 
 ?>
 
@@ -13,7 +14,7 @@ include "app/loginHandler.php";
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tsarbucks Login</title>
+  <title>Tsarbucks</title>
   <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
   <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Roboto:400,500,700,300,100">
   <link rel="stylesheet" type="text/css" href="css/styles.css">
@@ -48,18 +49,15 @@ include "app/loginHandler.php";
   <ul class="sidebar-nav" style="margin-left:0;">
     <li class="sidebar-brand"></li>
       <li>
-          <a href="compose_message.html"><i class="fa fa-plus " aria-hidden="true"> </i> <span style="margin-left:10px;"> New Message</span>
+          <a href="compose_message.html"><i class="fa fa-plus " aria-hidden="true"> </i> <span style="margin-left:10px;"> Home</span>
           </a>
       </li>
       <li class="custom-active-state">
-          <a href="inbox.html"><i class="fa fa-envelope " aria-hidden="true"> </i> <span style="margin-left:10px;"> Inbox</span>
+          <a href="home.php"><i class="fa fa-envelope " aria-hidden="true"> </i> <span style="margin-left:10px;"> Menu</span>
           <span class="badge">5</span></a>
       </li>
       <li>
-          <a href="spam.html"> <i class="fa fa-ban " aria-hidden="true"> </i> <span style="margin-left:10px;"> Spam</span><span class="badge spambadge">  3</span></a>
-      </li>
-      <li>
-          <a href="trash.html"> <i class="fa fa-trash-o" aria-hidden="true"> </i> <span style="margin-left:10px;"> Trash</span><span class="badge trashbadge">2</span> </a>
+          <a href="spam.html"> <i class="fa fa-ban " aria-hidden="true"> </i> <span style="margin-left:10px;"> My Orders</span><span class="badge spambadge">  3</span></a>
       </li>
     </ul>
 </div>
@@ -68,7 +66,7 @@ include "app/loginHandler.php";
 <div id="inbox-section">
 <h1>Inbox</h1>
 <!-- email table crap -->
-<table width="400px" class="table table-hover">
+<!-- <table width="400px" class="table table-hover">
     <thead>
         <tr>
             <th></th>
@@ -121,7 +119,7 @@ include "app/loginHandler.php";
             <td>11/11/2013</td>
         </tr>
     </tbody>
-</table>
+</table> -->
 
 <!-- functionality buttons for deletion, mark as read, etc.-->
 <button type="button" class="btn btn-primary">
