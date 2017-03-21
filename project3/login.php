@@ -1,6 +1,11 @@
 <?php
-include "app/databaseHandler.php";
-include "app/loginHandler.php";
+
+// redirect to home page if they're already logged in...
+session_start();
+
+if(isset($_SESSION["loggedin"]) || $_SESSION == 1) {
+  header("Location: home.php");
+}
 
 ?>
 

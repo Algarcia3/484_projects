@@ -39,7 +39,4 @@ class databaseHandler {
 			echo $products['display_name'];
 		}
 	}
-
-	
-
 }

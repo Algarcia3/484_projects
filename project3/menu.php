@@ -57,11 +57,11 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION == 1) {
 <div id="sidebar-wrapper">
   <ul class="sidebar-nav" style="margin-left:0;">
     <li class="sidebar-brand"></li>
-      <li class="custom-active-state">
+      <li>
           <a href="home.php"><i class="fa fa-plus " aria-hidden="true"> </i> <span style="margin-left:10px;"> Home</span>
           </a>
       </li>
-      <li>
+      <li class="custom-active-state">
           <a href="menu.php"><i class="fa fa-envelope " aria-hidden="true"> </i> <span style="margin-left:10px;"> Menu</span>
           <span class="badge">5</span></a>
       </li>
@@ -73,9 +73,73 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION == 1) {
 
 <!-- main view for inbox -->
 <div id="inbox-section">
-<h1>Welcome!!!!</h1>
+<h1>Inbox</h1>
 <!-- email table crap -->
-<h3>Soooo are you gonna buy something or get out cus I don't have all day</h3>
+<table width="400px" class="table table-hover">
+    <thead>
+        <tr>
+            <th></th>
+            <th>Sender</th>
+            <th>Title</th>
+            <th>Received</th>
+        </tr>
+    </thead>
+    <!-- <tbody>
+        <tr style="font-weight:bold">
+            <td><input type="checkbox"/></td>
+            <td>sfitzgerald@gmail.com</td>
+            <td>FUCK</td>
+            <td>12/07/2014</td>
+        </tr>
+        <tr style="font-weight:bold">
+            <td><input type="checkbox" /></td>
+            <td>brando@bran.com</td>
+            <td>wtf u doign 2nit/??</td>
+            <td>09/24/2014</td>
+        </tr>
+        <tr style="font-weight:bold">
+            <td><input type="checkbox" /></td>
+            <td>joseph@oreilly.com</td>
+            <td>NEW PARTS!!!!</td>
+            <td>09/24/2014</td>
+        </tr>
+        <tr style="font-weight:bold">
+            <td><input type="checkbox" /></td>
+            <td>matthew.fritz@darpa.gov</td>
+            <td>CONFIDENTIAL</td>
+            <td>03/07/2014</td>
+        </tr>
+        <tr style="font-weight:bold">
+            <td><input type="checkbox" /></td>
+            <td>services@tmobile.com</td>
+            <td>BILL DUEE!!!!</td>
+            <td>01/07/2014</td>
+        </tr>
+        <tr>
+            <td><input type="checkbox" /></td>
+            <td>frontdesk@meridianpointe.com</td>
+            <td>**Eviction Notice**</td>
+            <td>12/11/2013</td>
+        </tr>
+        <tr>
+            <td><input type="checkbox" /></td>
+            <td>central_it@csun.edu</td>
+            <td>Account Suspension</td>
+            <td>11/11/2013</td>
+        </tr>
+    </tbody> -->
+</table>
+
+<!-- functionality buttons for deletion, mark as read, etc.-->
+<button type="button" class="btn btn-primary">
+  <i class="fa fa-eye" aria-hidden="true"> </i> Mark As Read
+</button>
+<button type="button" class="btn btn-warning">
+  <i class="fa fa-ban" aria-hidden="true"> </i> Mark As Spam
+</button>
+<button type="button" class="btn btn-danger">
+  <i class="fa fa-trash-o" aria-hidden="true"> </i> Delete
+</button>
 
 
 </div>
