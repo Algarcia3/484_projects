@@ -1,3 +1,9 @@
+<?php
+include "app/databaseHandler.php";
+include "app/loginHandler.php";
+
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -40,9 +46,9 @@
     <div class="card card-container">
         <img class=logo-img src="images/coffee.svg" width="30" height="30" class="d-inline-block align-top" alt="">
         <p class=sign-in-text>Sign in to Tsarbucks</p>
-        <form class="form-signin" action="inbox.html" method="get">
-            <input type="email" id="inputEmail" class="form-control" placeholder="E-Mail" required autofocus>
-            <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+        <form class="form-signin" action="home.php" method="post">
+            <input name="username" type="username" id="inputEmail" class="form-control" placeholder="Username" required autofocus>
+            <input name="password" type="password" id="inputPassword" class="form-control" placeholder="Password" required>
             <div class="checkbox">
                 <label class="remember-me"><input type="checkbox" value=""> Remember Me</label>
             </div>

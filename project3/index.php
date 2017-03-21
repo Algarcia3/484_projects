@@ -23,30 +23,42 @@ body {
 
 h1 {
     font-size: 100px;
-    position: absolute;
+    position: fixed;
     width: 100px;
     height: 50px;
-    top: 50%;
-    left: 50%;
-    margin-left: -190px; /* margin is -0.5 * dimension */
-    margin-top: -155px; 
+    top: 30%;
+    left: 40%; 
+    text-align: center;
 }
 
 p {
-    position: absolute;
+    position: fixed;
     height: 50px;
-    top: 50%;
-    left: 50%;
-    margin-left: -190px; /* margin is -0.5 * dimension */
-    top: 270px;
-    left: 58%;
+    top: 40%;
+    left: 44%;
+    text-align: center;
+}
+
+a {
+    position: fixed;
+    top: 45%;
+    left: 43%;
+    width: 15%;
+}
+
+.btn-primary {
+  background-color: #006341;
+}
+
+.btn-primary:hover {
+  background-color: #00452D;
 }
 
 </style>
 
 <h1>Tsarbucks</h1>
-<p>Coffee. What else do you want?</p>
-
+<p>Coffee. What more do you bloody want?</p>
+<a href="login.php" class="btn btn-primary">Login</a>
 </body>
   <!-- js declarations at the end -->
   <script type="text/javascript" src="bower_components/jquery/dist/jquery.min.js"></script>
