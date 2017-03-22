@@ -77,8 +77,8 @@ VALUES
 /* Populating the users table; passwords are the same as the usernames */
 INSERT INTO `tsarbucks`.`users` (`user_id`, `username`, `password`, `display_name`)
 VALUES
-	(1, 'customer', 'b39f008e318efd2bb988d724a161b61c6909677f', 'Customer'),
-	(2, 'barista', 'e1386ca049393ffb6bba56d5a5106ae72e6a9e13', 'Barista');
+	(1, 'customer', 'b6c45863875e34487ca3c155ed145efe12a74581e27befec5aa661b8ee8ca6dd', 'Customer'),
+	(2, 'barista', 'ca03b861723f3bc73bc8a14f649bba1697d2340e282b1362cab61ee6945b2d1d', 'Barista');
 
 /* Populating the roles table */
 INSERT INTO `tsarbucks`.`roles` (`system_name`, `display_name`)

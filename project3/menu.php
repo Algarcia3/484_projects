@@ -52,7 +52,7 @@ if($_SESSION["role"] == "barista") {
         <a class="nav-link" href="#helppage">Help</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="logout.php" style="padding-left: 1500px;">Logout</a>
+        <a class="nav-link" href="logout.php">Logout</a>
       </li>
     </ul>
   </div>
@@ -108,18 +108,12 @@ if($_SESSION["role"] == "barista") {
         </tr>
     </thead>
     <tbody>
+    <!-- echo out all items from the database -->
       <?php if($_SESSION["role"] == "customer") : ?>
         <?php $db->get_all_products(); ?>
       <?php endif; ?>
     </tbody>
 </table>
-
-<!-- functionality buttons for deletion, mark as read, etc.-->
-<button type="button" class="btn btn-primary">
-  <i class="fa fa-eye" aria-hidden="true"> </i> Add to Cart
-</button>
-
-
 </div>
 
 </body>

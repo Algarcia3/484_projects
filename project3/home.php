@@ -46,7 +46,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION == 1) {
         <a class="nav-link" href="#helppage">Help</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="logout.php" style="padding-left: 1500px;">Logout</a>
+        <a class="nav-link" href="logout.php">Logout</a>
       </li>
     </ul>
   </div>
@@ -64,7 +64,6 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION == 1) {
         </li>
         <li>
             <a href="menu.php"><i class="fa fa-envelope " aria-hidden="true"> </i> <span style="margin-left:10px;"> Menu</span>
-            <span class="badge">5</span></a>
         </li>
         <li>
             <a href="spam.html"> <i class="fa fa-ban " aria-hidden="true"> </i> <span style="margin-left:10px;"> My Orders</span><span class="badge spambadge">  3</span></a>
