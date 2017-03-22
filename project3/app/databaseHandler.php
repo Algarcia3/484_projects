@@ -41,7 +41,7 @@ class databaseHandler {
 			echo '<td>'.$products["size"].'</td>';
 			echo '<td>';
 			echo '<button id = '.$products["product_id"].' type="button" class="btn btn-primary">';
-			echo '<i class="fa fa-eye" aria-hidden="true"> </i> Add to Cart';
+			echo '<i class="fa fa-cart-plus" aria-hidden="true"></i> Add to Cart';
 			echo '</button>';
 			echo '</td>';
 			echo '</tr>';

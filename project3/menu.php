@@ -32,6 +32,7 @@ if($_SESSION["role"] == "barista") {
   <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
   <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Roboto:400,500,700,300,100">
   <link rel="stylesheet" type="text/css" href="css/styles.css">
+  <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
 <!-- rest of the code goes here... -->
@@ -69,14 +70,17 @@ if($_SESSION["role"] == "barista") {
     <ul class="sidebar-nav" style="margin-left:0;">
       <li class="sidebar-brand"></li>
         <li>
-            <a href="home.php"><i class="fa fa-plus " aria-hidden="true"> </i> <span style="margin-left:10px;"> Home</span>
+            <a href="home.php"><i class="fa fa-home " aria-hidden="true"> </i> <span style="margin-left:10px;"> Home</span>
             </a>
         </li>
         <li class="custom-active-state">
-            <a href="menu.php"><i class="fa fa-envelope " aria-hidden="true"> </i> <span style="margin-left:10px;"> Menu</span>
+            <a href="menu.php"><i class="fa fa-bars " aria-hidden="true"> </i> <span style="margin-left:10px;"> Menu</span>
         </li>
         <li>
-            <a href="spam.html"> <i class="fa fa-ban " aria-hidden="true"> </i> <span style="margin-left:10px;"> My Orders</span><span class="badge spambadge">  3</span></a>
+            <a href="spam.html"> <i class="fa fa-coffee " aria-hidden="true"> </i> <span style="margin-left:10px;"> My Orders</span><span class="badge spambadge">  3</span></a>
+        </li>
+        <li>
+            <a href="cart.php"> <i class="fa fa-shopping-cart " aria-hidden="true"> </i> <span style="margin-left:10px;"> My Cart</span><span class="badge spambadge">  3</span></a>
         </li>
       </ul>
   </div>
