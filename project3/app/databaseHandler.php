@@ -47,4 +47,8 @@ class databaseHandler {
 			echo '</tr>';
 		}
 	}
+
+	public function get_user_orders() {
+		
+	}
 }

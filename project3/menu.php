@@ -9,10 +9,12 @@ $db = new databaseHandler();
 
 $login->login_action();
 
+// gtfo if you're not logged in
 if(!isset($_SESSION["loggedin"]) || $_SESSION == 1) {
   header("Location: login.php");
 }
 
+// gtfo if you're a barista, stop looking at my shit
 if($_SESSION["role"] == "barista") {
   header("Location: home.php");
 }
