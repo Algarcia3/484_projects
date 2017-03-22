@@ -2,11 +2,10 @@
 
 // yay custom mysql/db class
 include "db_config.php";
-$db_conn;
 
 class databaseHandler {
 
-	public function mysqlConnection() {
+	public function mysql_connection() {
 		// connection params for mysql database
 		$db_conn = mysqli_connect(DB_HOSTNAME, DB_USERNAME, DB_PASSWORD, DB_DATABASE);
 
@@ -18,10 +17,11 @@ class databaseHandler {
 		}
 	}
 
-	public function getAllProducts() {
+	public function get_all_products() {
 		// initiate mysql connection
-		$db_conn = $this->mysqlConnection();
-		$sql = "SELECT * FROM `products`";
+		$db_conn = $this->mysql_connection();
+		$sql = "SELECT product_id, display_name, price, size
+		FROM `products`";
 
 		// check if the query worked
 		if(!$result = $db_conn->query($sql)) {
@@ -34,9 +34,17 @@ class databaseHandler {
 		}
 
 		// throws assoc array of all our values
-		
 		while($products = $result->fetch_assoc()) {
-			echo $products['display_name'];
+			echo '<tr style="font-weight:bold">';
+			echo '<td>'.$products["display_name"].'</td>';
+			echo '<td>'.$products["price"].'</td>';
+			echo '<td>'.$products["size"].'</td>';
+			echo '<td>';
+			echo '<button id = '.$products["product_id"].' type="button" class="btn btn-primary">';
+			echo '<i class="fa fa-eye" aria-hidden="true"> </i> Add to Cart';
+			echo '</button>';
+			echo '</td>';
+			echo '</tr>';
 		}
 	}
 }

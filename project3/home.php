@@ -53,27 +53,45 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION == 1) {
 </nav>
 
 <!-- side navigation bar -->
+<!-- if the role is customer, see standard customer menu. -->
+<?php if($_SESSION["role"] == "customer") : ?>
+  <div id="sidebar-wrapper">
+    <ul class="sidebar-nav" style="margin-left:0;">
+      <li class="sidebar-brand"></li>
+        <li class="custom-active-state">
+            <a href="home.php"><i class="fa fa-plus " aria-hidden="true"> </i> <span style="margin-left:10px;"> Home</span>
+            </a>
+        </li>
+        <li>
+            <a href="menu.php"><i class="fa fa-envelope " aria-hidden="true"> </i> <span style="margin-left:10px;"> Menu</span>
+            <span class="badge">5</span></a>
+        </li>
+        <li>
+            <a href="spam.html"> <i class="fa fa-ban " aria-hidden="true"> </i> <span style="margin-left:10px;"> My Orders</span><span class="badge spambadge">  3</span></a>
+        </li>
+      </ul>
+  </div>
+<?php elseif($_SESSION["role"] == "barista") : ?>
+  <div id="sidebar-wrapper">
+    <ul class="sidebar-nav" style="margin-left:0;">
+      <li class="sidebar-brand"></li>
+        <li class="custom-active-state">
+            <a href="home.php"><i class="fa fa-plus " aria-hidden="true"> </i> <span style="margin-left:10px;"> Home</span>
+            </a>
+        </li>
+        <li>
+            <a href="menu.php"><i class="fa fa-envelope " aria-hidden="true"> </i> <span style="margin-left:10px;"> Pending</span>
+            <span class="badge">5</span></a>
+        </li>
+      </ul>
+  </div>
+<?php endif; ?>
 
-<div id="sidebar-wrapper">
-  <ul class="sidebar-nav" style="margin-left:0;">
-    <li class="sidebar-brand"></li>
-      <li class="custom-active-state">
-          <a href="home.php"><i class="fa fa-plus " aria-hidden="true"> </i> <span style="margin-left:10px;"> Home</span>
-          </a>
-      </li>
-      <li>
-          <a href="menu.php"><i class="fa fa-envelope " aria-hidden="true"> </i> <span style="margin-left:10px;"> Menu</span>
-          <span class="badge">5</span></a>
-      </li>
-      <li>
-          <a href="spam.html"> <i class="fa fa-ban " aria-hidden="true"> </i> <span style="margin-left:10px;"> My Orders</span><span class="badge spambadge">  3</span></a>
-      </li>
-    </ul>
-</div>
+
 
 <!-- main view for inbox -->
 <div id="inbox-section">
-<h1>Welcome!!!!</h1>
+<h1>Welcome <?php echo $_SESSION["username"];?>!!!!!!</h1>
 <!-- email table crap -->
 <h3>Soooo are you gonna buy something or get out cus I don't have all day</h3>
 

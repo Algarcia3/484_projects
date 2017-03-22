@@ -5,10 +5,16 @@ include "app/loginHandler.php";
 session_start();
 
 $login = new loginHandler();
+$db = new databaseHandler();
+
 $login->login_action();
 
 if(!isset($_SESSION["loggedin"]) || $_SESSION == 1) {
   header("Location: login.php");
+}
+
+if($_SESSION["role"] == "barista") {
+  header("Location: home.php");
 }
 
 ?>
@@ -54,91 +60,63 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION == 1) {
 
 <!-- side navigation bar -->
 
-<div id="sidebar-wrapper">
-  <ul class="sidebar-nav" style="margin-left:0;">
-    <li class="sidebar-brand"></li>
-      <li>
-          <a href="home.php"><i class="fa fa-plus " aria-hidden="true"> </i> <span style="margin-left:10px;"> Home</span>
-          </a>
-      </li>
-      <li class="custom-active-state">
-          <a href="menu.php"><i class="fa fa-envelope " aria-hidden="true"> </i> <span style="margin-left:10px;"> Menu</span>
-          <span class="badge">5</span></a>
-      </li>
-      <li>
-          <a href="spam.html"> <i class="fa fa-ban " aria-hidden="true"> </i> <span style="margin-left:10px;"> My Orders</span><span class="badge spambadge">  3</span></a>
-      </li>
-    </ul>
-</div>
+<!-- side navigation bar -->
+<!-- if the role is customer, see standard customer menu. -->
+<?php if($_SESSION["role"] == "customer") : ?>
+  <div id="sidebar-wrapper">
+    <ul class="sidebar-nav" style="margin-left:0;">
+      <li class="sidebar-brand"></li>
+        <li>
+            <a href="home.php"><i class="fa fa-plus " aria-hidden="true"> </i> <span style="margin-left:10px;"> Home</span>
+            </a>
+        </li>
+        <li class="custom-active-state">
+            <a href="menu.php"><i class="fa fa-envelope " aria-hidden="true"> </i> <span style="margin-left:10px;"> Menu</span>
+        </li>
+        <li>
+            <a href="spam.html"> <i class="fa fa-ban " aria-hidden="true"> </i> <span style="margin-left:10px;"> My Orders</span><span class="badge spambadge">  3</span></a>
+        </li>
+      </ul>
+  </div>
+<?php elseif($_SESSION["role"] == "barista") : ?>
+  <div id="sidebar-wrapper">
+    <ul class="sidebar-nav" style="margin-left:0;">
+      <li class="sidebar-brand"></li>
+        <li class="custom-active-state">
+            <a href="home.php"><i class="fa fa-plus " aria-hidden="true"> </i> <span style="margin-left:10px;"> Home</span>
+            </a>
+        </li>
+        <li>
+            <a href="menu.php"><i class="fa fa-envelope " aria-hidden="true"> </i> <span style="margin-left:10px;"> Pending</span>
+            <span class="badge">5</span></a>
+        </li>
+      </ul>
+  </div>
+<?php endif; ?>
 
 <!-- main view for inbox -->
 <div id="inbox-section">
-<h1>Inbox</h1>
+<h1>Menu</h1>
 <!-- email table crap -->
 <table width="400px" class="table table-hover">
     <thead>
         <tr>
+            <th>Product Name</th>
+            <th>Price</th>
+            <th>Size (oz)</th>
             <th></th>
-            <th>Sender</th>
-            <th>Title</th>
-            <th>Received</th>
         </tr>
     </thead>
-    <!-- <tbody>
-        <tr style="font-weight:bold">
-            <td><input type="checkbox"/></td>
-            <td>sfitzgerald@gmail.com</td>
-            <td>FUCK</td>
-            <td>12/07/2014</td>
-        </tr>
-        <tr style="font-weight:bold">
-            <td><input type="checkbox" /></td>
-            <td>brando@bran.com</td>
-            <td>wtf u doign 2nit/??</td>
-            <td>09/24/2014</td>
-        </tr>
-        <tr style="font-weight:bold">
-            <td><input type="checkbox" /></td>
-            <td>joseph@oreilly.com</td>
-            <td>NEW PARTS!!!!</td>
-            <td>09/24/2014</td>
-        </tr>
-        <tr style="font-weight:bold">
-            <td><input type="checkbox" /></td>
-            <td>matthew.fritz@darpa.gov</td>
-            <td>CONFIDENTIAL</td>
-            <td>03/07/2014</td>
-        </tr>
-        <tr style="font-weight:bold">
-            <td><input type="checkbox" /></td>
-            <td>services@tmobile.com</td>
-            <td>BILL DUEE!!!!</td>
-            <td>01/07/2014</td>
-        </tr>
-        <tr>
-            <td><input type="checkbox" /></td>
-            <td>frontdesk@meridianpointe.com</td>
-            <td>**Eviction Notice**</td>
-            <td>12/11/2013</td>
-        </tr>
-        <tr>
-            <td><input type="checkbox" /></td>
-            <td>central_it@csun.edu</td>
-            <td>Account Suspension</td>
-            <td>11/11/2013</td>
-        </tr>
-    </tbody> -->
+    <tbody>
+      <?php if($_SESSION["role"] == "customer") : ?>
+        <?php $db->get_all_products(); ?>
+      <?php endif; ?>
+    </tbody>
 </table>
 
 <!-- functionality buttons for deletion, mark as read, etc.-->
 <button type="button" class="btn btn-primary">
-  <i class="fa fa-eye" aria-hidden="true"> </i> Mark As Read
-</button>
-<button type="button" class="btn btn-warning">
-  <i class="fa fa-ban" aria-hidden="true"> </i> Mark As Spam
-</button>
-<button type="button" class="btn btn-danger">
-  <i class="fa fa-trash-o" aria-hidden="true"> </i> Delete
+  <i class="fa fa-eye" aria-hidden="true"> </i> Add to Cart
 </button>
 
 
