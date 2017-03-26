@@ -48,7 +48,33 @@ class databaseHandler {
 		}
 	}
 
-	public function get_user_orders() {
-		
+	public function get_all_orders() {
+		$db_conn = $this->mysql_connection();
+		$sql = "SELECT product_id, display_name, price, size
+		FROM `orders`";
+
+		// check if the query worked
+		if(!$result = $db_conn->query($sql)) {
+    		die('There was an error running the query [' . $db_conn->error . ']');
+		}
+
+		// edge cases... in case there are no products.
+		if($result->num_rows == 0) {
+			die("There are no orders. sry.");
+		}
+
+		// throws assoc array of all our values
+		while($orders = $result->fetch_assoc()) {
+			echo '<tr style="font-weight:bold">';
+			echo '<td>'.$orders["display_name"].'</td>';
+			echo '<td>'.$orders["price"].'</td>';
+			echo '<td>'.$orders["size"].'</td>';
+			echo '<td>';
+			echo '<button id = '.$orders["product_id"].' type="button" class="btn btn-primary">';
+			echo '<i class="fa fa-cart-plus" aria-hidden="true"></i> Add to Cart';
+			echo '</button>';
+			echo '</td>';
+			echo '</tr>';
+		}
 	}
 }
