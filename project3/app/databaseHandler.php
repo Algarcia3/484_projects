@@ -5,6 +5,8 @@ include "db_config.php";
 
 class databaseHandler {
 
+	public $order_count = 0;
+
 	public function mysql_connection() {
 		// connection params for mysql database
 		$db_conn = mysqli_connect(DB_HOSTNAME, DB_USERNAME, DB_PASSWORD, DB_DATABASE);
@@ -50,8 +52,10 @@ class databaseHandler {
 
 	public function get_all_orders() {
 		$db_conn = $this->mysql_connection();
-		$sql = "SELECT product_id, display_name, price, size
-		FROM `orders`";
+		$sql = "SELECT orders.product_id, quantity, completed, display_name, price, size
+				FROM orders 
+				INNER JOIN products 
+				ON orders.product_id = products.product_id";
 
 		// check if the query worked
 		if(!$result = $db_conn->query($sql)) {
@@ -62,6 +66,9 @@ class databaseHandler {
 		if($result->num_rows == 0) {
 			die("There are no orders. sry.");
 		}
+
+		// retrieve total number of orders
+		$order_count = $result->num_rows;
 
 		// throws assoc array of all our values
 		while($orders = $result->fetch_assoc()) {
@@ -76,5 +83,29 @@ class databaseHandler {
 			echo '</td>';
 			echo '</tr>';
 		}
+	}
+
+// retarded implementation of count, i know this can be simplified and can be done in a single query call but im too lazy im sorry
+	public function get_order_count() {
+		$db_conn = $this->mysql_connection();
+		$sql = "SELECT orders.product_id, quantity, completed, display_name, price, size
+				FROM orders 
+				INNER JOIN products 
+				ON orders.product_id = products.product_id";
+
+		// check if the query worked
+		if(!$result = $db_conn->query($sql)) {
+    		die('There was an error running the query [' . $db_conn->error . ']');
+		}
+
+		// edge cases... in case there are no products.
+		if($result->num_rows == 0) {
+			die("There are no orders. sry.");
+		}
+
+		// retrieve total number of orders
+		$order_count = $result->num_rows;
+
+		echo $order_count;
 	}
 }
