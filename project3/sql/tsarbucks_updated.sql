@@ -59,7 +59,7 @@ CREATE TABLE `products` (
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`product_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -68,7 +68,7 @@ CREATE TABLE `products` (
 
 LOCK TABLES `products` WRITE;
 /*!40000 ALTER TABLE `products` DISABLE KEYS */;
-INSERT INTO `products` VALUES (1,'Black Coffee (Small)',5.00,2,'2017-03-21 00:20:07',NULL),(2,'Black Coffee (Medium)',7.50,4,'2017-03-21 00:20:07',NULL),(3,'Black Coffee (Large)',10.00,8,'2017-03-21 00:20:07',NULL),(4,'Espresso (Small)',6.00,1,'2017-03-21 00:20:07',NULL),(5,'Espresso (Large)',12.00,2,'2017-03-21 00:20:07',NULL),(6,'Tsartisan Coffee (Small)',10.00,4,'2017-03-21 00:20:07',NULL),(7,'Tsartisan Coffee (Large)',20.00,8,'2017-03-21 00:20:07',NULL),(8,'Plum Floating in Perfume, Served in a Man\'s Hat',15.00,16,'2017-03-21 00:20:07',NULL);
+INSERT INTO `products` VALUES (1,'Black Coffee (Small)',5.00,2,'2017-03-27 01:26:12',NULL),(2,'Black Coffee (Medium)',7.50,4,'2017-03-21 00:20:07',NULL),(3,'Black Coffee (Large)',10.00,8,'2017-03-21 00:20:07',NULL),(4,'Espresso (Small)',6.00,1,'2017-03-21 00:20:07',NULL),(5,'Espresso (Large)',12.00,2,'2017-03-21 00:20:07',NULL),(6,'Tsartisan Coffee (Small)',10.00,4,'2017-03-21 00:20:07',NULL),(7,'Tsartisan Coffee (Large)',20.00,8,'2017-03-21 00:20:07',NULL),(8,'Plum Floating in Perfume, Served in a Man\'s Hat',15.00,16,'2017-03-21 00:20:07',NULL),(10,'Double Triple Bossy Deluxe, on a Raft, Four by Four Animal Style, Extra Shingles with a Shimmy and a Squeeze, Light Axle Grease, make it cry, Burn it, and let it Swim',35.00,69,'2017-03-22 05:04:52',NULL);
 /*!40000 ALTER TABLE `products` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -149,7 +149,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'customer','*71863C254516DFEB4FF64B27BA21FF236947E535','Customer','2017-03-21 00:20:07',NULL),(2,'barista','*24CEDD71E111C116154A28E8CE0321F5B794C635','Barista','2017-03-21 00:20:07',NULL);
+INSERT INTO `users` VALUES (1,'customer','b6c45863875e34487ca3c155ed145efe12a74581e27befec5aa661b8ee8ca6dd','Customer','2017-03-21 00:20:07',NULL),(2,'barista','ca03b861723f3bc73bc8a14f649bba1697d2340e282b1362cab61ee6945b2d1d','Barista','2017-03-21 00:20:07',NULL);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -162,4 +162,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-03-20 20:40:57
+-- Dump completed on 2017-03-26 19:45:58
