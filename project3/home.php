@@ -5,6 +5,8 @@ include "app/loginHandler.php";
 session_start();
 
 $login = new loginHandler();
+$db = new databaseHandler();
+
 $login->login_action();
 
 if(!isset($_SESSION["loggedin"]) || $_SESSION == 1) {
@@ -67,7 +69,16 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION == 1) {
             <a href="menu.php"><i class="fa fa-bars " aria-hidden="true"> </i> <span style="margin-left:10px;"> Menu</span>
         </li>
         <li>
-            <a href="myorders.php"> <i class="fa fa-coffee " aria-hidden="true"> </i> <span style="margin-left:10px;"> My Orders</span><span class="badge spambadge">  3</span></a>
+            <a href="myorders.php"> 
+            <i class="fa fa-coffee " aria-hidden="true"> 
+            </i> 
+              <span style="margin-left:10px;"> Orders</span>
+              <span class="badge spambadge">  
+                <?php if($_SESSION["role"] == "customer") : ?>
+                 <?php $db->get_order_count(); ?>
+                <?php endif; ?>
+              </span>
+            </a>
         </li>
         <li>
             <a href="cart.php"> <i class="fa fa-shopping-cart " aria-hidden="true"> </i> <span style="margin-left:10px;"> My Cart</span><span class="badge spambadge">  3</span></a>

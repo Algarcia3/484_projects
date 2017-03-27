@@ -72,20 +72,27 @@ class databaseHandler {
 
 		// throws assoc array of all our values
 		while($orders = $result->fetch_assoc()) {
+			// choose the right status
+			$status = '';
+			if($orders["completed"] == 1) {
+				$status = '<span class="label label-default" style="color:red;">Pending</span>';
+			} else {
+				$status = '<span class="label label-success" style="color: green;">Complete</span>';
+			}
+
 			echo '<tr style="font-weight:bold">';
 			echo '<td>'.$orders["display_name"].'</td>';
 			echo '<td>'.$orders["price"].'</td>';
 			echo '<td>'.$orders["size"].'</td>';
+			echo '<td>'.$orders["quantity"].'</td>';
+			echo '<td>'.$status.'</td>';
 			echo '<td>';
-			echo '<button id = '.$orders["product_id"].' type="button" class="btn btn-primary">';
-			echo '<i class="fa fa-cart-plus" aria-hidden="true"></i> Add to Cart';
-			echo '</button>';
 			echo '</td>';
 			echo '</tr>';
 		}
 	}
 
-// retarded implementation of count, i know this can be simplified and can be done in a single query call but im too lazy im sorry
+// retarded implementation of count, i know this can be simplified and can be done in a single query call in one of the functions above but im too lazy im sorry
 	public function get_order_count() {
 		$db_conn = $this->mysql_connection();
 		$sql = "SELECT orders.product_id, quantity, completed, display_name, price, size
@@ -107,5 +114,59 @@ class databaseHandler {
 		$order_count = $result->num_rows;
 
 		echo $order_count;
+	}
+
+	public function get_order_total() {
+		$db_conn = $this->mysql_connection();
+		$sql = "SELECT orders.product_id, price
+				FROM orders 
+				INNER JOIN products 
+				ON orders.product_id = products.product_id";
+
+		// check if the query worked
+		if(!$result = $db_conn->query($sql)) {
+    		die('There was an error running the query [' . $db_conn->error . ']');
+		}
+
+		// edge cases... in case there are no products.
+		if($result->num_rows == 0) {
+			die("There are no orders. sry.");
+		}
+
+		// retrieve total number of orders
+		$order_total = 0;
+
+		while($orders = $result->fetch_assoc()) {
+			$order_total += $orders["price"];
+		}
+
+		echo "$" . $order_total . ".00";
+	}
+
+	public function get_order_size() {
+		$db_conn = $this->mysql_connection();
+		$sql = "SELECT orders.product_id, size
+				FROM orders 
+				INNER JOIN products 
+				ON orders.product_id = products.product_id";
+
+		// check if the query worked
+		if(!$result = $db_conn->query($sql)) {
+    		die('There was an error running the query [' . $db_conn->error . ']');
+		}
+
+		// edge cases... in case there are no products.
+		if($result->num_rows == 0) {
+			die("There are no orders. sry.");
+		}
+
+		// retrieve total number of orders
+		$order_size_total = 0;
+
+		while($orders = $result->fetch_assoc()) {
+			$order_size_total += $orders["size"];
+		}
+
+		echo $order_size_total . " Oz.";
 	}
 }

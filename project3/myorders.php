@@ -119,7 +119,8 @@ if($_SESSION["role"] == "barista") {
             <th>Product Name</th>
             <th>Price</th>
             <th>Size (oz)</th>
-            <th></th>
+            <th>Quantity</th>
+            <th>Status</th>
         </tr>
     </thead>
     <tbody>
@@ -129,6 +130,8 @@ if($_SESSION["role"] == "barista") {
       <?php endif; ?>
     </tbody>
 </table>
+<h3>Total Cost: <?php $db->get_order_total(); ?></h3>
+<h3>Total Size: <?php $db->get_order_size(); ?></h3>
 </div>
 
 </body>

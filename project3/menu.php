@@ -76,8 +76,17 @@ if($_SESSION["role"] == "barista") {
         <li class="custom-active-state">
             <a href="menu.php"><i class="fa fa-bars " aria-hidden="true"> </i> <span style="margin-left:10px;"> Menu</span>
         </li>
-        <li>
-            <a href="spam.html"> <i class="fa fa-coffee " aria-hidden="true"> </i> <span style="margin-left:10px;"> My Orders</span><span class="badge spambadge">  3</span></a>
+       <li>
+            <a href="myorders.php"> 
+            <i class="fa fa-coffee " aria-hidden="true"> 
+            </i> 
+              <span style="margin-left:10px;"> Orders</span>
+              <span class="badge spambadge">  
+                <?php if($_SESSION["role"] == "customer") : ?>
+                 <?php $db->get_order_count(); ?>
+                <?php endif; ?>
+              </span>
+            </a>
         </li>
         <li>
             <a href="cart.php"> <i class="fa fa-shopping-cart " aria-hidden="true"> </i> <span style="margin-left:10px;"> My Cart</span><span class="badge spambadge">  3</span></a>
