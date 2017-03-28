@@ -116,7 +116,7 @@ if($_SESSION["role"] == "barista") {
 
 <!-- main view for inbox -->
 <div id="inbox-section">
-<h1>My Orders</h1>
+<h1>My Cart</h1>
 <!-- email table crap -->
 <table width="400px" class="table table-hover">
     <thead>
@@ -139,6 +139,14 @@ if($_SESSION["role"] == "barista") {
 </table>
 <h3>Total Cost: <?php $cart->get_cart_total_cost(); ?></h3>
 <h3>Total Size: <?php $cart->get_cart_total_size(); ?></h3>
+
+<!-- submit order button, really just sends everything in the SESSION array -->
+<?php if(!empty($_SESSION["items"])): ?>
+  <button type="button" class="btn btn-primary">
+    <i class="fa fa-arrow-up" aria-hidden="true"> </i> Submit Order
+  </button>
+<?php endif; ?>
+
 </div>
 
 </body>

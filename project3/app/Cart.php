@@ -112,4 +112,19 @@ class Cart extends databaseHandler {
 		}
 		header('Location: ../mycart.php');
 	}
+
+	public function submit_order() {
+		// start the session to place the items in the cart, stored in session var
+		session_start();
+		$db_conn = $this->mysql_connection();
+
+		// blow away the current database with orders
+		$delete_db = "DELETE FROM orders";
+
+		// populate the database with new orders
+		if(!$result = $db_conn->query($delete_db)) {
+    		die('There was an error running the query [' . $db_conn->error . ']');
+		}
+		
+	}
 }

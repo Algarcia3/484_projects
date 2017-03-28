@@ -53,7 +53,7 @@ class databaseHandler {
 
 	public function get_all_orders() {
 		$db_conn = $this->mysql_connection();
-		$sql = "SELECT orders.product_id, quantity, completed, display_name, price, size
+		$sql = "SELECT orders.product_id, orders.order_id, quantity, completed, display_name, price, size
 				FROM orders 
 				INNER JOIN products 
 				ON orders.product_id = products.product_id";
