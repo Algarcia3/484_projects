@@ -1,6 +1,7 @@
 <?php
 
 // yay custom mysql/db class
+// database config file is inside the app/ directory, db_config.php
 include "db_config.php";
 
 class databaseHandler {
@@ -42,7 +43,7 @@ class databaseHandler {
 			echo '<td>'.$products["price"].'</td>';
 			echo '<td>'.$products["size"].'</td>';
 			echo '<td>';
-			echo '<button id = '.$products["product_id"].' type="button" class="btn btn-primary">';
+			echo '<button name="cart_button" type="submit" value='.$products["product_id"].' type="button" class="btn btn-primary">';
 			echo '<i class="fa fa-cart-plus" aria-hidden="true"></i> Add to Cart';
 			echo '</button>';
 			echo '</td>';

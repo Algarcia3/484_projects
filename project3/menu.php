@@ -55,7 +55,7 @@ if($_SESSION["role"] == "barista") {
         <a class="nav-link" href="#helppage">Help</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="logout.php">Logout</a>
+        <a class="nav-link" href="actions/logout.php">Logout</a>
       </li>
     </ul>
   </div>
@@ -89,7 +89,7 @@ if($_SESSION["role"] == "barista") {
             </a>
         </li>
         <li>
-            <a href="cart.php"> <i class="fa fa-shopping-cart " aria-hidden="true"> </i> <span style="margin-left:10px;"> My Cart</span><span class="badge spambadge">  3</span></a>
+            <a href="mycart.php"> <i class="fa fa-shopping-cart " aria-hidden="true"> </i> <span style="margin-left:10px;"> My Cart</span><span class="badge spambadge">  3</span></a>
         </li>
       </ul>
   </div>
@@ -124,9 +124,11 @@ if($_SESSION["role"] == "barista") {
     </thead>
     <tbody>
     <!-- echo out all items from the database -->
+    <form action="actions/addtocart.php">
       <?php if($_SESSION["role"] == "customer") : ?>
         <?php $db->get_all_products(); ?>
       <?php endif; ?>
+    </form>
     </tbody>
 </table>
 </div>

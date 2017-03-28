@@ -76,19 +76,19 @@ if($_SESSION["role"] == "barista") {
         <li>
             <a href="menu.php"><i class="fa fa-bars " aria-hidden="true"> </i> <span style="margin-left:10px;"> Menu</span>
         </li>
-        <li class="custom-active-state">
+        <li>
             <a href="myorders.php"> 
             <i class="fa fa-coffee " aria-hidden="true"> 
-            </i>
+            </i> 
               <span style="margin-left:10px;"> Orders</span>
               <span class="badge spambadge">  
                 <?php if($_SESSION["role"] == "customer") : ?>
-                 <?php $db->get_order_count(); ?>
+                 <!-- <?php $db->get_order_count(); ?> -->
                 <?php endif; ?>
               </span>
             </a>
         </li>
-        <li>
+        <li class="custom-active-state">
             <a href="mycart.php"> <i class="fa fa-shopping-cart " aria-hidden="true"> </i> <span style="margin-left:10px;"> My Cart</span><span class="badge spambadge">  3</span></a>
         </li>
       </ul>
@@ -114,6 +114,7 @@ if($_SESSION["role"] == "barista") {
 <h1>My Orders</h1>
 <!-- email table crap -->
 <table width="400px" class="table table-hover">
+<?php echo $_SESSION["item"][1]["quantity"]; ?>
     <thead>
         <tr>
             <th>Product Name</th>

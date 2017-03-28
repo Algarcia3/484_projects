@@ -50,7 +50,7 @@ class loginHandler extends databaseHandler {
 		unset($_SESSION);
 		session_destroy();
 		session_write_close();
-		header('Location: login.php');
+		header('Location: ../login.php');
 		die;
 	}
 
