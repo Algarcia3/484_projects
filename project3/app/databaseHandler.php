@@ -66,16 +66,10 @@ class databaseHandler {
     		die('There was an error running the query [' . $db_conn->error . ']');
 		}
 
-		// edge cases... in case there are no products.
-		// if($result->num_rows == 0) {
-		// 	echo "<h1>No Orders Yet</h1>";
-		// }
-
 		// retrieve total number of orders
 		$order_count = $result->num_rows;
 
 		// throws assoc array of all our values
-
 		if($result->num_rows == 0) {
 			echo '<tr style="font-weight:bold">';
 			echo "<td><h2>Nothing here. Maybe try <a href='menu.php'>buying something?</a></h2>";
@@ -133,6 +127,7 @@ class databaseHandler {
 				$status = '<span class="label label-default" style="color:red;">Pending</span>';
 				$button_state = '<button name="cart_button" type="submit" value='.$orders["product_id"].' type="button" class="btn btn-primary">';
 			} else {
+				// make the button disabled after submitting the order
 				$status = '<span class="label label-success" style="color: green;">Complete</span>';
 				$button_state = '<button name="cart_button" type="submit" value='.$orders["product_id"].' type="button" class="btn btn-primary" disabled style="background-color: #00452D;">';
 			}

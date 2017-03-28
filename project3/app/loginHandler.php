@@ -4,6 +4,8 @@
 /*DISCLAIMER
 just focusing on ONE user for this project... customer user.
 I'm not considering other users with user ids, etc.
+ok maybe I am, i just realized I might have unintentionally added SOME
+support for other users. fuck
 */
 
 class loginHandler extends databaseHandler {
@@ -16,7 +18,7 @@ class loginHandler extends databaseHandler {
 			$user = mysqli_real_escape_string($db, $_POST["username"]);
 			$pass = mysqli_real_escape_string($db, $_POST["password"]);
 
-			// comparing the hashes of the text entered vs the ones in the db
+			// meh. good enough for government work
 			$pass = hash("sha256", $pass);
 
 			// prepared statement for the search of a user
