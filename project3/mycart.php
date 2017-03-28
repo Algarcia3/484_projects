@@ -1,11 +1,13 @@
 <?php
 include "app/databaseHandler.php";
 include "app/loginHandler.php";
+include "app/Cart.php";
 
 session_start();
 
 $login = new loginHandler();
 $db = new databaseHandler();
+$cart = new Cart();
 
 $login->login_action();
 
@@ -83,13 +85,16 @@ if($_SESSION["role"] == "barista") {
               <span style="margin-left:10px;"> Orders</span>
               <span class="badge spambadge">  
                 <?php if($_SESSION["role"] == "customer") : ?>
-                 <!-- <?php $db->get_order_count(); ?> -->
+                  <?php $db->get_order_count(); ?>
                 <?php endif; ?>
               </span>
             </a>
         </li>
         <li class="custom-active-state">
-            <a href="mycart.php"> <i class="fa fa-shopping-cart " aria-hidden="true"> </i> <span style="margin-left:10px;"> My Cart</span><span class="badge spambadge">  3</span></a>
+            <a href="mycart.php"> 
+              <i class="fa fa-shopping-cart " aria-hidden="true"> </i> 
+              <span style="margin-left:10px;"> My Cart</span>
+              <span class="badge spambadge"> <?php $cart->get_total_orders(); ?></span></a>
         </li>
       </ul>
   </div>
@@ -114,25 +119,26 @@ if($_SESSION["role"] == "barista") {
 <h1>My Orders</h1>
 <!-- email table crap -->
 <table width="400px" class="table table-hover">
-<?php echo $_SESSION["item"][1]["quantity"]; ?>
     <thead>
         <tr>
             <th>Product Name</th>
             <th>Price</th>
             <th>Size (oz)</th>
             <th>Quantity</th>
-            <th>Status</th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
+    <form action="actions/deletefromcart.php">
     <!-- echo out all items from the database -->
       <?php if($_SESSION["role"] == "customer") : ?>
-        <?php $db->get_all_orders(); ?>
+        <?php $cart->get_cart_items(); ?>
       <?php endif; ?>
+    </form>
     </tbody>
 </table>
-<h3>Total Cost: <?php $db->get_order_total(); ?></h3>
-<h3>Total Size: <?php $db->get_order_size(); ?></h3>
+<h3>Total Cost: <?php $cart->get_cart_total_cost(); ?></h3>
+<h3>Total Size: <?php $cart->get_cart_total_size(); ?></h3>
 </div>
 
 </body>

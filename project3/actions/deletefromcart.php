@@ -7,6 +7,6 @@ include "../app/Cart.php";
 session_start();
 
 $cart = new Cart();
-$cart->add_to_cart($_GET["cart_button"]);
+$cart->delete_from_cart($_GET["cart_button"]);
 
 ?>

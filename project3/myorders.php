@@ -1,12 +1,13 @@
 <?php
 include "app/databaseHandler.php";
 include "app/loginHandler.php";
+include "app/Cart.php";
 
 session_start();
 
 $login = new loginHandler();
 $db = new databaseHandler();
-
+$cart = new Cart();
 $login->login_action();
 
 // gtfo if you're not logged in
@@ -89,7 +90,10 @@ if($_SESSION["role"] == "barista") {
             </a>
         </li>
         <li>
-            <a href="mycart.php"> <i class="fa fa-shopping-cart " aria-hidden="true"> </i> <span style="margin-left:10px;"> My Cart</span><span class="badge spambadge">  3</span></a>
+            <a href="mycart.php"> 
+              <i class="fa fa-shopping-cart " aria-hidden="true"> </i> 
+              <span style="margin-left:10px;"> My Cart</span>
+              <span class="badge spambadge"> <?php $cart->get_total_orders(); ?></span></a>
         </li>
       </ul>
   </div>

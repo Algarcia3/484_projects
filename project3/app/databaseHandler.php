@@ -119,7 +119,7 @@ class databaseHandler {
 
 	public function get_order_total() {
 		$db_conn = $this->mysql_connection();
-		$sql = "SELECT orders.product_id, price
+		$sql = "SELECT orders.product_id, price, quantity
 				FROM orders 
 				INNER JOIN products 
 				ON orders.product_id = products.product_id";
@@ -137,16 +137,19 @@ class databaseHandler {
 		// retrieve total number of orders
 		$order_total = 0;
 
+		// multiply price by quantity
 		while($orders = $result->fetch_assoc()) {
-			$order_total += $orders["price"];
+			$order_total += $orders["price"] * $orders["quantity"];
 		}
 
-		echo "$" . $order_total . ".00";
+		//format to dollar output
+		$formatted_num = number_format($order_total, 2, '.', '');
+		echo "$" . $formatted_num;
 	}
 
 	public function get_order_size() {
 		$db_conn = $this->mysql_connection();
-		$sql = "SELECT orders.product_id, size
+		$sql = "SELECT orders.product_id, size, quantity
 				FROM orders 
 				INNER JOIN products 
 				ON orders.product_id = products.product_id";
@@ -164,8 +167,9 @@ class databaseHandler {
 		// retrieve total number of orders
 		$order_size_total = 0;
 
+		// more math for calculating sizes and quantity
 		while($orders = $result->fetch_assoc()) {
-			$order_size_total += $orders["size"];
+			$order_size_total += $orders["size"] * $orders["quantity"];
 		}
 
 		echo $order_size_total . " Oz.";
