@@ -141,11 +141,13 @@ if($_SESSION["role"] == "barista") {
 <h3>Total Size: <?php $cart->get_cart_total_size(); ?></h3>
 
 <!-- submit order button, really just sends everything in the SESSION array -->
+<form action="actions/submitorder.php">
 <?php if(!empty($_SESSION["items"])): ?>
-  <button type="button" class="btn btn-primary">
+  <button name="cart_button" type="submit" type="button" class="btn btn-primary">
     <i class="fa fa-arrow-up" aria-hidden="true"> </i> Submit Order
   </button>
 <?php endif; ?>
+</form>
 
 </div>
 
