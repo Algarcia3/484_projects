@@ -16,7 +16,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION == 1) {
 }
 
 // gtfo if you're a barista, stop looking at my shit
-if($_SESSION["role"] == "barista") {
+if($_SESSION["role"] == "customer") {
   header("Location: home.php");
 }
 
@@ -82,7 +82,7 @@ if($_SESSION["role"] == "barista") {
             <i class="fa fa-coffee " aria-hidden="true"> 
             </i>
               <span style="margin-left:10px;"> Orders</span>
-              <span id="spambadge_orders" class="badge spambadge">  
+              <span class="badge spambadge">  
                 <?php if($_SESSION["role"] == "customer") : ?>
                  <?php $db->get_order_count(); ?>
                 <?php endif; ?>
@@ -101,13 +101,13 @@ if($_SESSION["role"] == "barista") {
   <div id="sidebar-wrapper">
     <ul class="sidebar-nav" style="margin-left:0;">
       <li class="sidebar-brand"></li>
-        <li class="custom-active-state">
-            <a href="home.php"><i class="fa fa-plus " aria-hidden="true"> </i> <span style="margin-left:10px;"> Home</span>
+        <li>
+            <a href="home.php"><i class="fa fa-home " aria-hidden="true"> </i> <span style="margin-left:4px;"> Home</span>
             </a>
         </li>
-        <li>
-            <a href="menu.php"><i class="fa fa-envelope " aria-hidden="true"> </i> <span style="margin-left:10px;"> Pending</span>
-            <span class="badge">5</span></a>
+        <li class="custom-active-state">
+            <a href="pending.php"><i class="fa fa-envelope " aria-hidden="true"> </i> <span style="margin-left:4px;"> Pending</span>
+            <span class="badge"> <?php $db->count_pending_orders(); ?></span></a>
         </li>
       </ul>
   </div>
@@ -125,13 +125,16 @@ if($_SESSION["role"] == "barista") {
             <th>Size (oz)</th>
             <th>Quantity</th>
             <th>Status</th>
+            <td></td>
         </tr>
     </thead>
     <tbody>
     <!-- echo out all items from the database -->
-      <?php if($_SESSION["role"] == "customer") : ?>
-        <?php $db->get_customer_orders(); ?>
-      <?php endif; ?>
+      <form action="actions/completeorder.php">
+        <?php if($_SESSION["role"] == "barista") : ?>
+          <?php $db->get_all_orders(); ?>
+        <?php endif; ?>
+      </form>
     </tbody>
 </table>
 <h3>Total Cost: <?php $db->get_order_total(); ?></h3>

@@ -273,6 +273,10 @@ body
     padding-left: 15%;
 }
 
+#spambadge_orders {
+    padding-left: 18%;
+}
+
 .trashbadge {
     padding-left: 24%;
 }
@@ -285,4 +289,8 @@ body
 /*override the color to my favorite crappy brown looking one*/
 .custom-active-state {
     background: #312A25;
+}
+
+.btn-primary.disabled {
+    background-color: #00452D;
 }

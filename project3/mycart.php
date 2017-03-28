@@ -83,7 +83,7 @@ if($_SESSION["role"] == "barista") {
             <i class="fa fa-coffee " aria-hidden="true"> 
             </i> 
               <span style="margin-left:10px;"> Orders</span>
-              <span class="badge spambadge">  
+              <span id="spambadge_orders" class="badge spambadge">  
                 <?php if($_SESSION["role"] == "customer") : ?>
                   <?php $db->get_order_count(); ?>
                 <?php endif; ?>

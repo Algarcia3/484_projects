@@ -40,7 +40,7 @@ class Cart extends databaseHandler {
 		// start the session and get the cart items
 		if(!$_SESSION["items"]) {
 			echo '<tr style="font-weight:bold">';
-			echo "<td><h2>Nothing here. Maybe try buying something?</h2>";
+			echo "<td><h2>Nothing here. Maybe try <a href='menu.php'>buying something?</a></h2>";
 			echo '</tr>';
 		} else {
 			foreach($_SESSION["items"] as $key => $value) {

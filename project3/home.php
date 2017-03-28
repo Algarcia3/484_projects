@@ -75,7 +75,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION == 1) {
             <i class="fa fa-coffee " aria-hidden="true"> 
             </i> 
               <span style="margin-left:10px;"> Orders</span>
-              <span class="badge spambadge">  
+              <span id="spambadge_orders" class="badge spambadge">  
                 <?php if($_SESSION["role"] == "customer") : ?>
                  <?php $db->get_order_count(); ?>
                 <?php endif; ?>
@@ -95,12 +95,12 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION == 1) {
     <ul class="sidebar-nav" style="margin-left:0;">
       <li class="sidebar-brand"></li>
         <li class="custom-active-state">
-            <a href="home.php"><i class="fa fa-home" aria-hidden="true"> </i> <span style="margin-left:10px;"> Home</span>
+            <a href="home.php"><i class="fa fa-home" aria-hidden="true"> </i> <span style="margin-left:4px;"> Home</span>
             </a>
         </li>
         <li>
-            <a href="menu.php"><i class="fa fa-bars " aria-hidden="true"> </i> <span style="margin-left:10px;"> Pending</span>
-            <span class="badge">5</span></a>
+            <a href="pending.php"><i class="fa fa-bars " aria-hidden="true"> </i> <span style="margin-left:4px;"> Pending</span>
+            <span class="badge"> <?php $db->count_pending_orders(); ?></span></a>
         </li>
       </ul>
   </div>
