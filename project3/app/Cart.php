@@ -104,9 +104,9 @@ class Cart extends databaseHandler {
 
 	public function delete_from_cart($id) {
 		foreach($_SESSION["items"] as $key => $value) {
-			if($id == $key && $value["quantity"] > 1) {
+			if($id == $key && !($value["quantity"] == 1)) {
 				$_SESSION["items"][$id]["quantity"] = $value["quantity"] - 1;
-			} else {
+			} else if($value["quantity"] == 1) {
 				unset($_SESSION["items"][$id]);
 			}
 		}
