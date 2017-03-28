@@ -53,10 +53,11 @@ class databaseHandler {
 
 	public function get_all_orders() {
 		$db_conn = $this->mysql_connection();
-		$sql = "SELECT orders.product_id, orders.order_id, quantity, completed, display_name, price, size
+		$sql = "SELECT orders.product_id, orders.order_id, orders.user_id, quantity, completed, display_name, price, size
 				FROM orders 
 				INNER JOIN products 
-				ON orders.product_id = products.product_id";
+				ON orders.product_id = products.product_id
+				WHERE orders.user_id = ".$_SESSION["user_id"];
 
 		// check if the query worked
 		if(!$result = $db_conn->query($sql)) {

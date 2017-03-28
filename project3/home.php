@@ -95,11 +95,11 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION == 1) {
     <ul class="sidebar-nav" style="margin-left:0;">
       <li class="sidebar-brand"></li>
         <li class="custom-active-state">
-            <a href="home.php"><i class="fa fa-plus " aria-hidden="true"> </i> <span style="margin-left:10px;"> Home</span>
+            <a href="home.php"><i class="fa fa-home" aria-hidden="true"> </i> <span style="margin-left:10px;"> Home</span>
             </a>
         </li>
         <li>
-            <a href="menu.php"><i class="fa fa-envelope " aria-hidden="true"> </i> <span style="margin-left:10px;"> Pending</span>
+            <a href="menu.php"><i class="fa fa-bars " aria-hidden="true"> </i> <span style="margin-left:10px;"> Pending</span>
             <span class="badge">5</span></a>
         </li>
       </ul>
@@ -112,9 +112,11 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION == 1) {
 <div id="inbox-section">
 <h1>Welcome <?php echo $_SESSION["username"];?>!!!!!!</h1>
 <!-- email table crap -->
-<h3>Soooo are you gonna buy something or get out cus I don't have all day</h3>
-
-
+<?php if($_SESSION["role"] == "customer") : ?>
+  <h3>Soooo are you gonna buy something or get out cus I don't have all day</h3>
+<?php elseif ($_SESSION["role"] == "barista") : ?>
+  <h3>Soooo are you gonna make something or get out cus I don't have all day</h3>
+<?php endif; ?>
 </div>
 
 </body>

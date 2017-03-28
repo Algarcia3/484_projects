@@ -126,6 +126,23 @@ class Cart extends databaseHandler {
 		if(!$result = $db_conn->query($delete_db)) {
     		die('There was an error running the query [' . $db_conn->error . ']');
 		}
+
+		//build the new query using mysql
+		$order_sql = "INSERT INTO orders (order_id, user_id, product_id, quantity, completed) VALUES ";
+
+		foreach($_SESSION["items"] as $key => $value) {
+			$order_sql .= "(1, ".$_SESSION["user_id"].", $key, ".$value["quantity"].", 1), ";
+		}
+
+		// WHAT A FUCKING HACKJOB TO FORMAT THE QUERY CORRECTLY LOL
+		$formatted_sql = substr($order_sql, 0, -2);
+		$formatted_sql .= ";";
+
+		if(!$result = $db_conn->query($formatted_sql)) {
+    		die('There was an error running the query [' . $db_conn->error . ']');
+		} else {
+			header("Location: ../myorders.php");
+		}
 		
 	}
 }

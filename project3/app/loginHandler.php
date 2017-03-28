@@ -20,19 +20,20 @@ class loginHandler extends databaseHandler {
 			$pass = hash("sha256", $pass);
 
 			// prepared statement for the search of a user
-			if($sql = $db->prepare("SELECT users.username, users.password, user_roles.role 
+			if($sql = $db->prepare("SELECT users.user_id, users.username, users.password, user_roles.role 
 									FROM users LEFT JOIN user_roles 
 									ON users.user_id = user_roles.user_id
 									WHERE username = ? AND password = ?;")) {
 				$sql->bind_param("ss", $user, $pass);
 				$sql->execute();
-				$sql->bind_result($username, $password, $role);
+				$sql->bind_result($user_id, $username, $password, $role);
 				
 				// if a good username and password is received, log in. else, you're fucked.
 				if ($sql->fetch()) {
 					// set the sesh var to 0, meaning logged in. 1 for logged out.
 					$_SESSION["loggedin"] = 1;
 					$_SESSION["username"] = $user;
+					$_SESSION["user_id"] = $user_id;
 					$_SESSION["role"] = $role;
 					mysqli_close($db);
 				} else {
