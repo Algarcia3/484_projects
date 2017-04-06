@@ -119,19 +119,11 @@ class Cart extends databaseHandler {
 		session_start();
 		$db_conn = $this->mysql_connection();
 
-		// blow away the current database with orders
-		$delete_db = "DELETE FROM orders";
-
-		// populate the database with new orders
-		if(!$result = $db_conn->query($delete_db)) {
-    		die('There was an error running the query [' . $db_conn->error . ']');
-		}
-
 		//build the new query using mysql
-		$order_sql = "INSERT INTO orders (order_id, user_id, product_id, quantity, completed) VALUES ";
+		$order_sql = "INSERT INTO orders (user_id, product_id, quantity, completed) VALUES ";
 
 		foreach($_SESSION["items"] as $key => $value) {
-			$order_sql .= "(1, ".$_SESSION["user_id"].", $key, ".$value["quantity"].", 1), ";
+			$order_sql .= "(".$_SESSION["user_id"].", $key, ".$value["quantity"].", 1), ";
 		}
 
 		// WHAT A FUCKING HACKJOB TO FORMAT THE QUERY CORRECTLY LOL

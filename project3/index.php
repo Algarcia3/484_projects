@@ -57,7 +57,6 @@ a {
 </style>
 
 <h1>Tsarbucks</h1>
-<p>Coffee. What more do you bloody want?</p>
 <a href="login.php" class="btn btn-primary">Login</a>
 </body>
   <!-- js declarations at the end -->
