@@ -1,4 +1,4 @@
-Users Table
+Users
 ============
 user_id - PK - INT - AUTO INCREMENT
 review_id - FK - INT
@@ -7,19 +7,19 @@ user_email - VARCHAR - 255 - NOT NULL
 user_password - VARCHAR - 255 - NOT NULL
 timestamps(); - CREATED AT - UPDATED AT
 
-Roles Table
+Roles
 ===========
 role_id - PK - INT - AUTO INCREMENT
 role - VARCHAR - 255 - NOT NULL
 timestamps();
 
-user_roles Table
+user_roles
 ===========
 role_id - FK - INT - AUTO INCREMENT
 user_id - FK - INT - AUTO INCREMENT
 timestamps();
 
-Reviews Table
+Reviews
 ===========
 review_id - PK - INT - AUTO INCREMENT - NOT NULL
 restaurant_id - FK - INT
@@ -29,7 +29,7 @@ review_tagline - VARCHAR - 255 - NOT NULL
 review - TEXT - NOT NULL
 timestamps();
 
-Restaurant Table
+Restaurant
 ===========
 restaurant_id - PK - INT - AUTO INCREMENT - NOT NULL
 review_id - FK - INT
@@ -40,7 +40,7 @@ city - VARCHAR - 255 - NOT NULL
 state - VARCHAR - 255 - NOT NULL
 website - VARCHAR - 255 - NOT NULL
 
-Menu Table
+Menu
 ===========
 menu_id - PK - INT - AUTO INCREMENT - NOT NULL
 restaurant_id - FK - INT
