@@ -13,7 +13,7 @@ role_id - PK - INT - AUTO INCREMENT
 role - VARCHAR - 255 - NOT NULL
 timestamps();
 
-Roles Pivot Table
+user_roles Table
 ===========
 role_id - FK - INT - AUTO INCREMENT
 user_id - FK - INT - AUTO INCREMENT
