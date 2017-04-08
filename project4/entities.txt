@@ -1,0 +1,49 @@
+Users Table
+============
+user_id - PK - INT - AUTO INCREMENT
+review_id - FK - INT
+username - VARCHAR - 255 - NOT NULL
+user_email - VARCHAR - 255 - NOT NULL
+user_password - VARCHAR - 255 - NOT NULL
+timestamps(); - CREATED AT - UPDATED AT
+
+Roles Table
+===========
+role_id - PK - INT - AUTO INCREMENT
+role - VARCHAR - 255 - NOT NULL
+timestamps();
+
+Roles Pivot Table
+===========
+role_id - FK - INT - AUTO INCREMENT
+user_id - FK - INT - AUTO INCREMENT
+timestamps();
+
+Reviews Table
+===========
+review_id - PK - INT - AUTO INCREMENT - NOT NULL
+restaurant_id - FK - INT
+user_id - FK - INT
+rating - TINYINT - NOT NULL
+review_tagline - VARCHAR - 255 - NOT NULL
+review - TEXT - NOT NULL
+timestamps();
+
+Restaurant Table
+===========
+restaurant_id - PK - INT - AUTO INCREMENT - NOT NULL
+review_id - FK - INT
+menu_id - FK - INT
+restaurant_name - VARCHAR - 255 - NOT NULL
+street_address - VARCHAR - 255 - NOT NULL
+city - VARCHAR - 255 - NOT NULL
+state - VARCHAR - 255 - NOT NULL
+website - VARCHAR - 255 - NOT NULL
+
+Menu Table
+===========
+menu_id - PK - INT - AUTO INCREMENT - NOT NULL
+restaurant_id - FK - INT
+item_name - VARCHAR - 255 - NOT NULL
+item_description - VARCHAR - 255 - NOT NULL
+item_price - INT(?) OR NUMERIC(15,2) - NOT NULL
