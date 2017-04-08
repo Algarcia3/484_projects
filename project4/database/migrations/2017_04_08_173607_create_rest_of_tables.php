@@ -29,8 +29,6 @@ class CreateRestOfTables extends Migration
         // restaurants table
         Schema::create('restaurants', function(Blueprint $table) {
             $table->increments('restaurant_id');
-            $table->integer('review_id')->unsigned();
-            $table->integer('menu_id')->unsigned();
             $table->string('restaurant_name');
             $table->string('street_address');
             $table->string('city');
@@ -50,26 +48,14 @@ class CreateRestOfTables extends Migration
 
         // finally, set all of the foreign key constraints between tables
         Schema::table('reviews', function($table) {
-            // defining all of the FK constraints for reviews
-            $table->foreign('restaurant_id')
-                  ->references('restaurant_id')
-                  ->on('restaurants');
             // FK constraints for users
             $table->foreign('user_id')
                   ->references('user_id')
                   ->on('users');
-        });
 
-        // FK constraints on restaurants
-        Schema::table('restaurants', function($table) {
-            // defining all of the FK constraints for reviews
-            $table->foreign('review_id')
-                  ->references('review_id')
-                  ->on('reviews');
-            // FK constraints for users
-            $table->foreign('menu_id')
-                  ->references('menu_id')
-                  ->on('menus');
+            $table->foreign('restaurant_id')
+                  ->references('restaurant_id')
+                  ->on('restaurants');
         });
 
         // FK constraints on menus
