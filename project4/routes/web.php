@@ -16,5 +16,5 @@ Route::get('/', function () {
 });
 
 
-// meh. resources controllers are much easier to deal with
+// resource controllers. fuckin awesome, too lazy to write out my routes
 Route::resource('users', 'UsersController');
