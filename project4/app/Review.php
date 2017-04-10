@@ -12,9 +12,13 @@ class Review extends Model
     // specifying the actual name of the table
     protected $table = "reviews";
 
-    // return the 
-    public function users() {
-        return $this->hasOne('App\User');
+    // return the relations
+    public function user() {
+        return $this->hasOne('App\User', 'user_id');
+    }
+
+    public function restaurant() {
+        return $this->hasOne('App\Restaurant', 'restaurant_id');
     }
 
     /**
@@ -23,16 +27,6 @@ class Review extends Model
      * @var array
      */
     protected $fillable = [
-        'username', 'user_email', 'user_password',
+        'rating', 'review_tagline', 'review',
     ];
-
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
-    protected $hidden = [
-        'user_password',
-    ];
-
 }

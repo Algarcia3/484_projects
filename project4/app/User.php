@@ -12,8 +12,9 @@ class User extends Model
     // specifying that my table is called "users"
     protected $table = "users";
 
+    // specify the foreign key, since we're using a custom one
     public function reviews() {
-        return $this->hasMany('App\Review');
+        return $this->hasMany('App\Review', 'review_id');
     }
 
     /**

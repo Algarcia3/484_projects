@@ -47,7 +47,8 @@ class UsersController extends Controller
     public function show(User $user)
     {
         //
-        echo $user->username;
+        // echo $user->username;
+        echo $user->reviews()->get();
     }
 
     /**
