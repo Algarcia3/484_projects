@@ -48,7 +48,7 @@ class UsersController extends Controller
     {
         //
         // echo $user->username;
-        echo $user->reviews()->get();
+        echo $user->roles()->get();
     }
 
     /**

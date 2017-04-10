@@ -17,6 +17,11 @@ class User extends Model
         return $this->hasMany('App\Review', 'review_id');
     }
 
+    // specify the many to many relation
+    public function roles() {
+        return $this->belongsToMany('App\Role', 'user_roles', 'user_id', 'role_id');
+    }
+
     /**
      * The attributes that are mass assignable.
      *
