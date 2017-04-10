@@ -18,7 +18,9 @@ class RestaurantsTableSeeder extends Seeder
             'street_address' => '1409 Cranberry Ln.',
             'city'	=>	'Harris Bluffs',
             'state'	=>	'California',
-            'website'	=>	'google.com'
+            'website'	=>	'google.com',
+            'created_at' => date("Y-m-d H:i:s"),
+            'updated_at' => date("Y-m-d H:i:s"),
         ]);
     }
 }

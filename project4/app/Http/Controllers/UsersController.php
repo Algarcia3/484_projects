@@ -47,7 +47,7 @@ class UsersController extends Controller
     public function show(User $user)
     {
         //
-        echo "test";
+        echo $user->username;
     }
 
     /**

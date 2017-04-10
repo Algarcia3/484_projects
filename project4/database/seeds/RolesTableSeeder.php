@@ -15,6 +15,8 @@ class RolesTableSeeder extends Seeder
         DB::table('roles')->insert([
             'role_id' => 1,
             'role' => "Administrator",
+            'created_at' => date("Y-m-d H:i:s"),
+            'updated_at' => date("Y-m-d H:i:s"),
         ]);
     }
 }

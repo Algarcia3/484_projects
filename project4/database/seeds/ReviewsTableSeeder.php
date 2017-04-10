@@ -18,7 +18,9 @@ class ReviewsTableSeeder extends Seeder
             'user_id' => 1,
             'rating'	=>	3,
             'review_tagline'	=>	'FUCK THIS PLACE LOL',
-            'review'	=>	"I dont rike it"
+            'review'	=>	"I dont rike it",
+            'created_at' => date("Y-m-d H:i:s"),
+            'updated_at' => date("Y-m-d H:i:s"),
         ]);
     }
 }
