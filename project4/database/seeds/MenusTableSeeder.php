@@ -17,7 +17,7 @@ class MenusTableSeeder extends Seeder
             'restaurant_id' => 1,
             'item_name' => 'slop',
             'menu_description'	=>	'sounds friggin good',
-            'menu_price'	=>	"1.00"
+            'menu_price'	=>	"1.00",
         ]);
     }
 }

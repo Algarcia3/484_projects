@@ -16,7 +16,9 @@ class UsersTableSeeder extends Seeder
             'user_id' => 1,
             'username' => 'brandon',
             'user_email'	=>	'brandon@brandon.com',
-            'user_password'	=>	bcrypt("test")
+            'user_password'	=>	bcrypt("test"),
+            'created_at' => date("Y-m-d H:i:s"),
+            'updated_at' => date("Y-m-d H:i:s"),
         ]);
     }
 }
