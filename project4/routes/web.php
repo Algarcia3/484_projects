@@ -14,3 +14,7 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+
+// meh. resources controllers are much easier to deal with
+Route::resource('users', 'UsersController');

@@ -4,16 +4,17 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class User extends Model
+class Review extends Model
 {
-    // specify primary key
-    protected $primaryKey = "user_id";
+	// specify primary key
+    protected $primaryKey = "review_id";
 
-    // specifying that my table is called "users"
-    protected $table = "users";
+    // specifying the actual name of the table
+    protected $table = "reviews";
 
-    public function reviews() {
-        return $this->hasMany('App\Review');
+    // return the 
+    public function users() {
+        return $this->hasOne('App\User');
     }
 
     /**
@@ -33,4 +34,5 @@ class User extends Model
     protected $hidden = [
         'user_password',
     ];
+
 }
