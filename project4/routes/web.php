@@ -11,10 +11,14 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+// replaced laravel landing page with simple home page
+Route::get('home', function () {
+    return view('home');
 });
-
 
 // resource controllers. fuckin awesome, too lazy to write out my routes
 Route::resource('users', 'UsersController');
+
+Route::get('login', array('uses' => 'HomeController@showLogin'));
+
+Route::post('login', array('uses' => 'HomeController@performLogin'));
