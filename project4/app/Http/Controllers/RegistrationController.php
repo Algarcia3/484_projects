@@ -25,9 +25,9 @@ class RegistrationController extends Controller
     public function performRegistration() {
     	// validation rules for registering user.
     	$rules = array(
-    		'username'	=>	'required|alphaNum',
+    		'username'	=>	'required|alphaNum|unique:users',
     		'name'	=>	'required|alphaNum',
-    		'email'	=>	'required|email',
+    		'email'	=>	'unique:users,email',
     		'password'	=>	'required|alphaNum|min:3|confirmed',
     		'password_confirmation' => 'required|alphaNum|min:3',
     	);
@@ -52,6 +52,9 @@ class RegistrationController extends Controller
     		$new_user->password = $hashed_pw;
 
     		$new_user->save();
+
+    		// attach the role to the user
+    		$new_user->roles()->attach(1);
 
     		// redirect to the login page, and display account successfully created message
     		Session::flash("acc_created", "Your account has been successfully created. Try logging in!");
