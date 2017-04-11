@@ -25,3 +25,9 @@ Route::get('login', array('uses' => 'HomeController@showLogin'));
 Route::get('logout', array('uses' => 'HomeController@performLogout'));
 
 Route::post('login', array('uses' => 'HomeController@performLogin'));
+
+Route::group(['before' => 'auth'], function()
+{
+    //define all routes here that need to be auth'd
+    Route::get('login', array('uses' => 'HomeController@showLogin'));
+});

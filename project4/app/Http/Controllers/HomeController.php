@@ -13,7 +13,11 @@ class HomeController extends Controller
 {
     // creating the first function for logging in
     public function showLogin() {
-        return \View::make('login');
+        if(Auth::check()) {
+            return Redirect::to("home");
+        } else {
+            return \View::make('login');
+        }
     }
 
     public function performLogin() {
@@ -43,7 +47,6 @@ class HomeController extends Controller
                 return Redirect::to("login");
             }
         }
-
     }
 
     // perform the logout functionality when clicked
