@@ -12,12 +12,13 @@
 */
 
 // replaced laravel landing page with simple home page
-Route::get('home', function () {
+Route::get('/', function () {
     return view('home');
 });
 
 // resource controllers. fuckin awesome, too lazy to write out my routes
 Route::resource('users', 'UsersController');
+Route::resource('restaurants', 'RestaurantsController');
 
 // routes associated with loggin in and out of the application.
 Route::get('login', array('uses' => 'HomeController@showLogin'));
@@ -31,3 +32,7 @@ Route::get('logout', array('uses' => 'HomeController@performLogout'));
 Route::get('register', array('uses' => 'RegistrationController@showRegistration'));
 
 Route::post('register', array('uses' => 'RegistrationController@performRegistration'));
+
+// routes for the main view
+
+Route::get('main', array('uses'	=>	'MainController@showMainPage'));

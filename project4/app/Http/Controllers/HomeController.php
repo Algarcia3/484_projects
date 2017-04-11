@@ -42,7 +42,7 @@ class HomeController extends Controller
 
             if(Auth::attempt($user_data)) {
                 Session::flash('message', "Successfully logged in.");
-                return Redirect::to("home");
+                return Redirect::to("main");
             } else {
                 Session::flash('message', "Incorrect username or password. Please try again.");
                 return Redirect::to("login");

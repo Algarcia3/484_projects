@@ -53,8 +53,8 @@ class RegistrationController extends Controller
 
     		$new_user->save();
 
-    		// attach the role to the user
-    		$new_user->roles()->attach(1);
+    		// attach the of reviewer to the default user
+    		$new_user->roles()->attach(2);
 
     		// redirect to the login page, and display account successfully created message
     		Session::flash("acc_created", "Your account has been successfully created. Try logging in!");

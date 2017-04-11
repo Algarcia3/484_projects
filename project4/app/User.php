@@ -24,6 +24,18 @@ class User extends Authenticatable
         return $this->belongsToMany('App\Role', 'user_roles', 'user_id', 'role_id');
     }
 
+    // permission checking to see if the user is an admin
+    public function isAdmin() {
+        foreach ($this->roles()->get() as $role)
+        {
+            if ($role->role == 'Administrator')
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
     /**
      * The attributes that are mass assignable.
      *
