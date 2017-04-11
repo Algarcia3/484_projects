@@ -22,12 +22,12 @@ Route::resource('users', 'UsersController');
 // routes associated with loggin in and out of the application.
 Route::get('login', array('uses' => 'HomeController@showLogin'));
 
-Route::get('logout', array('uses' => 'HomeController@performLogout'));
-
 Route::post('login', array('uses' => 'HomeController@performLogin'));
 
-Route::group(['before' => 'auth'], function()
-{
-    //define all routes here that need to be auth'd
-    Route::get('login', array('uses' => 'HomeController@showLogin'));
-});
+Route::get('logout', array('uses' => 'HomeController@performLogout'));
+
+// routes associated with user creation.
+
+Route::get('register', array('uses' => 'RegistrationController@showRegistration'));
+
+Route::post('register', array('uses' => 'RegistrationController@performRegistration'));

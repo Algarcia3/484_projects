@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Where To Eat Login</title>
+  <title>Where to Eat Registration</title>
   <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
   <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Roboto:400,500,700,300,100">
   <link rel="stylesheet" type="text/css" href="css/styles.css">
@@ -28,33 +28,57 @@
       <li class="nav-item active">
         <a class="nav-link" href="home">Home <span class="sr-only">(current)</span></a>
       </li>
-      @if(!Auth::check()) 
-        <li class="nav-item">
-          <a class="nav-link" href="login">Login</a>
-        </li>
-      @endif
+      <li class="nav-item" >
+        <a class="nav-link" href="login">Login</a>
+      </li>
       @if(!Auth::check()) 
         <li class="nav-item">
           <a class="nav-link" href="register">Register</a>
         </li>
       @endif
-      @if(Auth::check())
-      <li class="nav-item">
-        <a class="nav-link" href="{{ URL::to('logout') }}">Logout</a>
-      </li>
-      @endif
     </ul>
   </div>
 </nav>
 
-<!-- container for login section -->
+<!-- container for register section -->
 
 <div class="container">
-    <div class="card card-container">
-    @if (Session::has('message'))
-           <div class="alert alert-success">{{ Session::get('message') }}</div>
-    @endif
-        Come in! And don't eat everything.
+    <div class="card card-container" style="max-width:700px;">
+        <img class=logo-img src="images/coffee.svg" width="30" height="30" class="d-inline-block align-top" alt="">
+        <p class=register-text>Register Your Account</p>
+
+        {{-- return error messages --}}
+{{--         @if (Session::has('message'))
+           <div class="alert alert-danger">{{ Session::get('message') }}</div>
+        @endif
+        @if (Session::has('logged_out'))
+           <div class="alert alert-success">{{ Session::get('logged_out') }}</div>
+        @endif --}}
+
+        {{ Form::open(array('url' => 'register', 'class' => 'form-signin')) }}
+            {{-- {{ $errors->first('username') }}
+            {{ $errors->first('name') }}
+            {{ $errors->first('email') }}
+            {{ $errors->first('password') }} --}}
+
+            @if (count($errors) > 0)
+                @foreach ($errors->all() as $error)
+                  <div class="alert alert-danger">{{ $error }}</div>
+                @endforeach
+            @endif
+
+            {{ Form::text('username', null, array('placeholder'=>'Username', 'class'=>'form-control' ) ) }}
+            {{ Form::text('name', null, array('placeholder'=>'Name', 'class'=>'form-control' ) ) }}
+            {{ Form::email('email', null, array('placeholder'=>'E-Mail', 'class'=>'form-control' ) ) }}
+            {{ Form::password('password', array('placeholder'=>'Password', 'class'=>'form-control' ) ) }}
+            {{ Form::password('password_confirmation', array('placeholder'=>'Confirm Password', 'class'=>'form-control' ) ) }}
+            {{ Form::submit('Register', array('class' => 'btn btn-lg btn-primary btn-block btn-signin')) }}</p>
+        {{ Form::close() }}
+
+        </p>
+
+        <div class="signin-help">
+    </div>
     </div>
 </div>
 

@@ -30,7 +30,7 @@ class HomeController extends Controller
         $validator = Validator::make(Input::all(), $rules);
 
         // if the validator fails, redirect to login page with flash message
-        if ($validator->fails()) {
+        if($validator->fails()) {
             return Redirect::to('login')
                 ->withErrors($validator)
                 ->withInput(Input::except('password'));
@@ -41,6 +41,7 @@ class HomeController extends Controller
             );
 
             if(Auth::attempt($user_data)) {
+                Session::flash('message', "Successfully logged in.");
                 return Redirect::to("home");
             } else {
                 Session::flash('message', "Incorrect username or password. Please try again.");
@@ -53,6 +54,7 @@ class HomeController extends Controller
     public function performLogout() {
         // kill the session and log user out of application
         Auth::logout();
+        Session::flash('logged_out', "Successfully logged out.");
         return Redirect::to("login");
     }
 

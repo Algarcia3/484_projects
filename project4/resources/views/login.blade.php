@@ -31,6 +31,11 @@
       <li class="nav-item" >
         <a class="nav-link" href="login">Login</a>
       </li>
+      @if(!Auth::check()) 
+        <li class="nav-item">
+          <a class="nav-link" href="register">Register</a>
+        </li>
+      @endif
     </ul>
   </div>
 </nav>
@@ -45,6 +50,12 @@
         {{-- return error messages --}}
         @if (Session::has('message'))
            <div class="alert alert-danger">{{ Session::get('message') }}</div>
+        @endif
+        @if (Session::has('logged_out'))
+           <div class="alert alert-success">{{ Session::get('logged_out') }}</div>
+        @endif
+        @if (Session::has('acc_created'))
+           <div class="alert alert-success">{{ Session::get('acc_created') }}</div>
         @endif
 
         {{ Form::open(array('url' => 'login', 'class' => 'form-signin')) }}
