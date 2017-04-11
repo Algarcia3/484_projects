@@ -6,9 +6,11 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Restaurants</title>
-  <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+  {{-- <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous"> --}}
+  <link rel="stylesheet" href="{{ asset('bower_components/bootstrap/dist/css/bootstrap.min.css') }}" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
   <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Roboto:400,500,700,300,100">
-  <link rel="stylesheet" type="text/css" href="css/styles.css">
+ {{--  <link rel="stylesheet" type="text/css" href="css/styles.css"> --}}
+  <link rel="stylesheet" type="text/css" href="{{ asset('css/styles.css') }}">
   <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
@@ -20,13 +22,13 @@
     <span class="navbar-toggler-icon"></span>
   </button>
   <a class="navbar-brand" href="index.php">
-    <img src="images/coffee.svg" width="30" height="30" class="d-inline-block align-top tsar-title" alt="">
+    <img src="{{asset('images/coffee.svg')}}" width="30" height="30" class="d-inline-block align-top tsar-title" alt="">
     Where To Eat
   </a>
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav">
       <li class="nav-item active">
-        <a class="nav-link" href="main">Home<span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="{{URL::to('main')}}">Home<span class="sr-only">(current)</span></a>
       </li>
       @if(Auth::user())
       <li class="nav-item">
@@ -47,7 +49,7 @@
     <ul class="sidebar-nav" style="margin-left:0;">
       <li class="sidebar-brand"></li>
         <li>
-            <a href="main"><i class="fa fa-home" aria-hidden="true"> </i> <span style="margin-left:10px;"> Home</span>
+            <a href="{{URL::to('main')}}"><i class="fa fa-home" aria-hidden="true"> </i> <span style="margin-left:10px;"> Home</span>
             </a>
         </li>
         <li class="custom-active-state">
@@ -95,24 +97,36 @@
 @if(Session::has('message'))
     <div class="alert alert-success" style="width: 50%;">{{ Session::get('message') }}</div>
 @endif
+    
+    <h1>Restaurant Details</h1>
+    &nbsp;
+    <h2>{{ $restaurants->restaurant_name }}</h2>
+    &nbsp;
+    <h3>Address</h3>
+    <h4>{{ $restaurants->street_address }}</h4>
+    <h4>{{ $restaurants->city }},</h4>
+    <h4>{{ $restaurants->state }}</h4>
+    &nbsp;
+    <h3>Website</h3>
+    <h4>{{ $restaurants->website }}</h4>
+    &nbsp;
+    <h3>Reviews</h3>
 
-@foreach ($restaurants as $restaurant)
-    <h1>{{ $restaurant->restaurant_name }}</h1>
-    <h4>{{ $restaurant->street_address }}</h4>
-    <h4>{{ $restaurant->city }},</h4>
-    <h4>{{ $restaurant->state }}</h4>
-    <h4>{{ $restaurant->website }}</h4>
-    {{-- link restaurant route using the id --}}
-    <a href="{{ URL::to('restaurants/' . $restaurant->restaurant_id)}}">
-      <button name="cart_button" class="btn btn-primary">
-        <i class="fa fa-cart-plus" aria-hidden="true">
-        </i> Restaurant Details
-        </button>
-    </a>
+    {{-- output all of the reviews --}}
+    @foreach($reviews as $review)
+      <h4>{{$review->review_tagline}}</h4>
+      <h5>Review By: {{$review->user->username}}</h5>
+      <h6>Posted: {{ date('F d, Y H:i:s', strtotime($review->created_at)) }}</h6>
+      <h6>Rating: {{ $review->rating }}/5</h6>
+      <h5>{{ $review->review }}</h5>
+      &nbsp;
+    @endforeach
+
+    {{-- link restaurants route using the id --}}
+    
     </br>
     &nbsp;
 
-@endforeach
 
 </div>
 

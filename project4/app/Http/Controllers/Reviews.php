@@ -3,17 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Input;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\Redirect;
-use Illuminate\Support\Facades\Hash;
-use Auth;
-use Session;
-use App\User;
-use App\Review;
-use App\Restaurant;
 
-class RestaurantsController extends Controller
+class Reviews extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -23,9 +14,6 @@ class RestaurantsController extends Controller
     public function index()
     {
         //
-        $restaurants = Restaurant::all();
-        return \View::make('restaurants')->with("restaurants", $restaurants);
-
     }
 
     /**
@@ -58,9 +46,6 @@ class RestaurantsController extends Controller
     public function show($id)
     {
         //
-        $restaurants = Restaurant::findOrFail($id);
-        $reviews = Review::where('restaurant_id', '=', $id)->get();
-        return \View::make('showrestaurant')->with("restaurants", $restaurants)->with("reviews", $reviews);
     }
 
     /**
