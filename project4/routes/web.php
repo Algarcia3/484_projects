@@ -19,6 +19,9 @@ Route::get('home', function () {
 // resource controllers. fuckin awesome, too lazy to write out my routes
 Route::resource('users', 'UsersController');
 
+// routes associated with loggin in and out of the application.
 Route::get('login', array('uses' => 'HomeController@showLogin'));
+
+Route::get('logout', array('uses' => 'HomeController@performLogout'));
 
 Route::post('login', array('uses' => 'HomeController@performLogin'));

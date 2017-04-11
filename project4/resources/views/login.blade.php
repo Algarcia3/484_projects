@@ -42,15 +42,6 @@
         <img class=logo-img src="images/coffee.svg" width="30" height="30" class="d-inline-block align-top" alt="">
         <p class=sign-in-text>Sign In</p>
 
-        {{-- <form class="form-signin" action="home.php" method="post">
-            <input name="username" type="username" id="inputEmail" class="form-control" placeholder="Username" required autofocus>
-            <input name="password" type="password" id="inputPassword" class="form-control" placeholder="Password" required>
-            <div class="checkbox">
-                <label class="remember-me"><input type="checkbox" value=""> Remember Me</label>
-            </div>
-            <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit">Login</button>
-        </form> --}}
-
         {{-- return error messages --}}
         @if (Session::has('message'))
            <div class="alert alert-danger">{{ Session::get('message') }}</div>

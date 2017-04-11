@@ -31,6 +31,11 @@
       <li class="nav-item">
         <a class="nav-link" href="login">Login</a>
       </li>
+      @if(Auth::check())
+      <li class="nav-item">
+        <a class="nav-link" href="{{ URL::to('logout') }}">Logout</a>
+      </li>
+      @endif
     </ul>
   </div>
 </nav>
