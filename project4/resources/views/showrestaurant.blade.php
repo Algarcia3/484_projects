@@ -53,7 +53,7 @@
             </a>
         </li>
         <li class="custom-active-state">
-            <a href="restaurants"><i class="fa fa-cutlery " aria-hidden="true"> </i> <span style="margin-left:10px;"> Restaurants</span>
+            <a href="{{URL::to('restaurants')}}"><i class="fa fa-cutlery " aria-hidden="true"> </i> <span style="margin-left:10px;"> Restaurants</span>
             </a>
         </li>
 
