@@ -21,4 +21,15 @@ class MainController extends Controller
             return Redirect::to('login');
         }
     }
+
+    public function myProfile() {
+        if(Auth::check()) {
+            // pass the id of the currently logged in user to the query
+            $user_profiles = User::where('user_id', '=', Auth::user()->user_id)->get();
+            return \View::make('myprofile')->with("user_profiles", $user_profiles);
+        } else {
+            // go back home pls
+            return Redirect::to("home");
+        }
+    }
 }

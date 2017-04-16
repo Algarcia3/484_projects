@@ -26,7 +26,7 @@ class RegistrationController extends Controller
     	// validation rules for registering user.
     	$rules = array(
     		'username'	=>	'required|alphaNum|unique:users',
-    		'name'	=>	'required|alphaNum',
+    		'name'	=>	'required',
     		'email'	=>	'unique:users,email',
     		'password'	=>	'required|alphaNum|min:3|confirmed',
     		'password_confirmation' => 'required|alphaNum|min:3',

@@ -71,7 +71,7 @@
 
         @if(Auth::user() && !Auth::user()->isAdmin())
         <li class="custom-active-state">
-            <a href="myorders.php"> 
+            <a href="{{ URL::to('myreviews') }}"> 
             <i class="fa fa-comments-o " aria-hidden="true"> 
             </i> 
               <span style="margin-left:10px;">My Reviews</span>
@@ -80,7 +80,7 @@
             </a>
         </li>
         <li>
-            <a href="mycart.php"> 
+            <a href="{{ URL::to('myprofile') }}"> 
               <i class="fa fa-user " aria-hidden="true"> </i> 
               <span style="margin-left:10px;"> My Profile</span>
             </a>
@@ -103,9 +103,10 @@
  @else
     @foreach ($reviews as $review)
     <h2>{{ $review->restaurant->restaurant_name}}
-    <h3>Rating: {{ $review->rating }}/5</h3>
-    <h4>{{ $review->review_tagline }}</h4>
-    <h4>{{ $review->review }},</h4>
+    <h5>Rating: {{ $review->rating }}/5</h5>
+    <h5>Posted: {{ $review->created_at }}</h5>
+    <h3>{{ $review->review_tagline }}</h3>
+    <h6>{{ $review->review }}</h6>
     </br>
     &nbsp;
     @endforeach

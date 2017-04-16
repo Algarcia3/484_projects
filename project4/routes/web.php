@@ -36,3 +36,6 @@ Route::get('main', array('uses'	=>	'MainController@showMainPage'));
 Route::get('restaurants/{restaurant}/addreview', 'RestaurantsController@showReview');
 Route::post('restaurants/{restaurant}/addreview', 'RestaurantsController@createReview');
 Route::get('myreviews', 'RestaurantsController@showMyReviews');
+
+// routes for showing user profile
+Route::get('myprofile', 'MainController@myProfile');
