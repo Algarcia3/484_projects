@@ -91,7 +91,6 @@
       </ul>
   </div>
 
-
 <!-- main view for inbox -->
 <div id="inbox-section">
 @if(Session::has('message'))

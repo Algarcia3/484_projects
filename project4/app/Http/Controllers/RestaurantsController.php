@@ -57,7 +57,7 @@ class RestaurantsController extends Controller
      */
     public function show($id)
     {
-        //
+        // variables retrieving
         $restaurants = Restaurant::findOrFail($id);
         $reviews = Review::where('restaurant_id', '=', $id)->get();
         // get the avg rating of course
