@@ -60,7 +60,12 @@ class RestaurantsController extends Controller
         //
         $restaurants = Restaurant::findOrFail($id);
         $reviews = Review::where('restaurant_id', '=', $id)->get();
-        return \View::make('showrestaurant')->with("restaurants", $restaurants)->with("reviews", $reviews);
+        // get the avg rating of course
+        $avg_rating = $reviews->avg('rating');
+        return \View::make('showrestaurant')
+                ->with("restaurants", $restaurants)
+                ->with("reviews", $reviews)
+                ->with("avg_rating", $avg_rating);
     }
 
     /**

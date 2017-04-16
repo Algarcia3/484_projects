@@ -116,6 +116,8 @@
 
     &nbsp;
     <h2>{{ $restaurants->restaurant_name }}</h2>
+    <h3>Average Rating</h3>
+    <h3>{{ $avg_rating }}/5</h3>
     &nbsp;
     <h3>Address</h3>
     <h4>{{ $restaurants->street_address }}</h4>
