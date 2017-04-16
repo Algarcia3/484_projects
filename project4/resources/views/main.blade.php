@@ -69,7 +69,7 @@
             </a>
         </li>
         <li>
-            <a href="mycart.php"> 
+            <a href="{{ URL::to('myprofile') }}"> 
               <i class="fa fa-user " aria-hidden="true"> </i> 
               <span style="margin-left:10px;"> My Profile</span>
             </a>
