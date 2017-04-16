@@ -73,7 +73,7 @@
 
         @if(Auth::user() && !Auth::user()->isAdmin())
         <li>
-            <a href="myorders.php"> 
+            <a href="{{URL::to('myreviews')}}"> 
             <i class="fa fa-comments-o " aria-hidden="true"> 
             </i> 
               <span style="margin-left:10px;">My Reviews</span>
@@ -115,8 +115,7 @@
 
     &nbsp;
     <h2>{{ $restaurants->restaurant_name }}</h2>
-    <h3>Average Rating</h3>
-    <h3>{{ $avg_rating }}/5</h3>
+    <h3>Average Rating: {{ $avg_rating }}/5</h3>
     &nbsp;
     <h3>Address</h3>
     <h4>{{ $restaurants->street_address }}</h4>
@@ -129,14 +128,18 @@
     <h3>Reviews</h3>
 
     {{-- output all of the reviews --}}
-    @foreach($reviews as $review)
-      <h4>{{$review->review_tagline}}</h4>
-      <h5>Review By: {{$review->user->username}}</h5>
-      <h6>Posted: {{ date('F d, Y H:i:s', strtotime($review->created_at)) }}</h6>
-      <h6>Rating: {{ $review->rating }}/5</h6>
-      <h5>{{ $review->review }}</h5>
-      &nbsp;
-    @endforeach
+    @if(count($reviews) == 0)
+      <h4>No one has written reviews about this place. :(</h4>
+    @else
+      @foreach($reviews as $review)
+        <h4>{{$review->review_tagline}}</h4>
+        <h5>Review By: {{$review->user->username}}</h5>
+        <h6>Posted: {{ date('F d, Y H:i:s', strtotime($review->created_at)) }}</h6>
+        <h6>Rating: {{ $review->rating }}/5</h6>
+        <h5>{{ $review->review }}</h5>
+        &nbsp;
+      @endforeach
+    @endif
 
     {{-- link restaurants route using the id --}}
 

@@ -22,16 +22,5 @@ class ReviewsTableSeeder extends Seeder
             'created_at' => date("Y-m-d H:i:s"),
             'updated_at' => date("Y-m-d H:i:s"),
         ]);
-        //
-        DB::table('reviews')->insert([
-            'review_id' => 2,
-            'restaurant_id' => 1,
-            'user_id' => 1,
-            'rating'    =>  5,
-            'review_tagline'    =>  'nvm its better',
-            'review'    =>  "I still dont rike it",
-            'created_at' => date("Y-m-d H:i:s"),
-            'updated_at' => date("Y-m-d H:i:s"),
-        ]);
     }
 }

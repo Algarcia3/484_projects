@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Home</title>
+  <title>Restaurants</title>
   <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
   <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Roboto:400,500,700,300,100">
   <link rel="stylesheet" type="text/css" href="css/styles.css">
@@ -28,9 +28,15 @@
       <li class="nav-item active">
         <a class="nav-link" href="main">Home<span class="sr-only">(current)</span></a>
       </li>
+      @if(Auth::user())
       <li class="nav-item">
         <a class="nav-link" href="{{ URL::to('logout') }}">Logout</a>
       </li>
+      @else
+        <li class="nav-item">
+          <a class="nav-link" href="login">Login</a>
+        </li>
+      @endif
     </ul>
   </div>
 </nav>
@@ -40,27 +46,32 @@
   <div id="sidebar-wrapper">
     <ul class="sidebar-nav" style="margin-left:0;">
       <li class="sidebar-brand"></li>
-        <li class="custom-active-state">
+        <li>
             <a href="main"><i class="fa fa-home" aria-hidden="true"> </i> <span style="margin-left:10px;"> Home</span>
             </a>
         </li>
         <li>
             <a href="restaurants"><i class="fa fa-cutlery " aria-hidden="true"> </i> <span style="margin-left:10px;"> Restaurants</span>
-        </li>
-
-        @if(Auth::user()->isAdmin())
-        <li>
-            <a href="myorders.php"> 
-            <i class="fa fa-comments-o " aria-hidden="true"> 
-            </i> 
-              <span style="margin-left:10px;">Admin Panel</span>
-              <span id="spambadge_orders" class="badge spambadge">  
-              </span>
             </a>
         </li>
-        @elseif(Auth::check())
-        <li>
-            <a href="{{URL::to('myreviews')}}"> 
+
+        @if(Auth::user())
+          @if(Auth::user()->isAdmin())
+          <li>
+              <a href="myorders.php"> 
+              <i class="fa fa-comments-o " aria-hidden="true"> 
+              </i> 
+                <span style="margin-left:10px;">Admin Panel</span>
+                <span id="spambadge_orders" class="badge spambadge">  
+                </span>
+              </a>
+          </li>
+          @endif
+        @endif
+
+        @if(Auth::user() && !Auth::user()->isAdmin())
+        <li class="custom-active-state">
+            <a href="myorders.php"> 
             <i class="fa fa-comments-o " aria-hidden="true"> 
             </i> 
               <span style="margin-left:10px;">My Reviews</span>
@@ -82,11 +93,23 @@
 <!-- main view for inbox -->
 <div id="inbox-section">
 @if(Session::has('message'))
-    <div class="alert alert-success" style="width: 45%">{{ Session::get('message') }}</div>
+    <div class="alert alert-success" style="width: 50%;">{{ Session::get('message') }}</div>
 @endif
 
-<h1>Welcome, {{ Auth::user()->name }}!!!!</h1>
-<h2>Quit fuckin around and start doin stuff yea?!?!?</h2>
+<h1>My Reviews</h1>
+&nbsp;
+ @if(count($reviews) == 0)
+    <h1>You have no reviews. Maybe start writing some?</h1>
+ @else
+    @foreach ($reviews as $review)
+    <h2>{{ $review->restaurant->restaurant_name}}
+    <h3>Rating: {{ $review->rating }}/5</h3>
+    <h4>{{ $review->review_tagline }}</h4>
+    <h4>{{ $review->review }},</h4>
+    </br>
+    &nbsp;
+    @endforeach
+ @endif
 
 </div>
 

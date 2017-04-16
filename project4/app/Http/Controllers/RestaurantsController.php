@@ -69,6 +69,24 @@ class RestaurantsController extends Controller
     }
 
     /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function showMyReviews()
+    {
+        if(Auth::check()) {
+            // pass in the id again from the previous route, so it knows what to do with it
+            $reviews = Review::where('user_id', '=', Auth::user()->user_id)->get();
+            return \View::make('myreviews')->with("reviews", $reviews);
+        } else {
+            // go back home pls
+            return Redirect::to("home");
+        }
+    }
+
+    /**
      * Display the form for creating a review
      *
      */

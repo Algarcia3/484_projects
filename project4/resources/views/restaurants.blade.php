@@ -71,7 +71,7 @@
 
         @if(Auth::user() && !Auth::user()->isAdmin())
         <li>
-            <a href="myorders.php"> 
+            <a href="{{ URL::to('myreviews') }}"> 
             <i class="fa fa-comments-o " aria-hidden="true"> 
             </i> 
               <span style="margin-left:10px;">My Reviews</span>

@@ -35,3 +35,4 @@ Route::get('main', array('uses'	=>	'MainController@showMainPage'));
 // routes for the reviews, creation (Restaurants Controller will be handling it)
 Route::get('restaurants/{restaurant}/addreview', 'RestaurantsController@showReview');
 Route::post('restaurants/{restaurant}/addreview', 'RestaurantsController@createReview');
+Route::get('myreviews', 'RestaurantsController@showMyReviews');
