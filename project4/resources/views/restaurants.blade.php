@@ -105,7 +105,7 @@
     {{-- link restaurant route using the id --}}
     <a href="{{ URL::to('restaurants/' . $restaurant->restaurant_id)}}">
       <button name="cart_button" class="btn btn-primary">
-        <i class="fa fa-cart-plus" aria-hidden="true">
+        <i class="fa fa-info-circle" aria-hidden="true">
         </i> Restaurant Details
         </button>
     </a>

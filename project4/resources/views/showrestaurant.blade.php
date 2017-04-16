@@ -99,6 +99,14 @@
 @endif
     
     <h1>Restaurant Details</h1>
+    {{-- button goes here for displaying add review --}}
+    <a href="{{ URL::to('restaurants/')}}">
+      <button name="cart_button" class="btn btn-primary">
+        <i class="fa fa-plus" aria-hidden="true">
+        </i> Write A Review
+        </button>
+    </a>
+
     &nbsp;
     <h2>{{ $restaurants->restaurant_name }}</h2>
     &nbsp;
@@ -123,13 +131,10 @@
     @endforeach
 
     {{-- link restaurants route using the id --}}
-    
+
     </br>
     &nbsp;
-
-
 </div>
-
 </body>
 	<!-- js declarations at the end -->
 	<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
