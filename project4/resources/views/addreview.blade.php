@@ -97,50 +97,23 @@
 @if(Session::has('message'))
     <div class="alert alert-success" style="width: 50%;">{{ Session::get('message') }}</div>
 @endif
-
-@if(Session::has('review_created'))
-    <div class="alert alert-success" style="width: 50%;">{{ Session::get('review_created') }}</div>
-@endif
     
-    <h1>Restaurant Details</h1>
+    <h1>Add a Review</h1>
     {{-- button goes here for displaying add review --}}
+    {{ Form::open(array('url' => 'restaurants/' . $restaurants->restaurant_id . '/addreview', 'class' => 'form-signin')) }}
+            @if (count($errors) > 0)
+                @foreach ($errors->all() as $error)
+                  <div class="alert alert-danger">{{ $error }}</div>
+                @endforeach
+            @endif
 
-  @if(Auth::user())
-    <a href="{{ URL::to('restaurants/' . $restaurants->restaurant_id . '/addreview')}}">
-      <button name="review_button" class="btn btn-primary" style="float: right;">
-        <i class="fa fa-plus" aria-hidden="true">
-        </i> Write A Review
-        </button>
-    </a>
-  @endif
-
-    &nbsp;
-    <h2>{{ $restaurants->restaurant_name }}</h2>
-    &nbsp;
-    <h3>Address</h3>
-    <h4>{{ $restaurants->street_address }}</h4>
-    <h4>{{ $restaurants->city }},</h4>
-    <h4>{{ $restaurants->state }}</h4>
-    &nbsp;
-    <h3>Website</h3>
-    <h4>{{ $restaurants->website }}</h4>
-    &nbsp;
-    <h3>Reviews</h3>
-
-    {{-- output all of the reviews --}}
-    @foreach($reviews as $review)
-      <h4>{{$review->review_tagline}}</h4>
-      <h5>Review By: {{$review->user->username}}</h5>
-      <h6>Posted: {{ date('F d, Y H:i:s', strtotime($review->created_at)) }}</h6>
-      <h6>Rating: {{ $review->rating }}/5</h6>
-      <h5>{{ $review->review }}</h5>
-      &nbsp;
-    @endforeach
-
-    {{-- link restaurants route using the id --}}
-
-    </br>
-    &nbsp;
+           Rating {{ Form::select('rating', array("5" => 5, "4" => 4, "3" => 3, "2" => 2, "1" => 1), null, array('class' => 'form-control', 'style' => 'width: 200px')) }}
+           &nbsp;
+            {{ Form::text('title', null, array('placeholder'=>'Title', 'class'=>'form-control', 'style' => 'width: 300px' ) ) }}
+            {{ Form::textarea('review', null, array('placeholder' => 'Write your review here...', 'class' => 'form-control', 'style' => 'width: 800px'))}}
+            &nbsp;
+            {{ Form::submit('Submit Review', array('class' => 'btn btn-lg btn-primary btn-block btn-signin', 'style' => 'width: 200px')) }}
+        {{ Form::close() }}
 </div>
 </body>
 	<!-- js declarations at the end -->

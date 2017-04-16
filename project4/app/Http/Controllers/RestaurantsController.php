@@ -64,6 +64,60 @@ class RestaurantsController extends Controller
     }
 
     /**
+     * Display the form for creating a review
+     *
+     */
+    public function showReview($id) {
+        if(Auth::check()) {
+            // pass in the id again from the previous route, so it knows what to do with it
+            $restaurants = Restaurant::findOrFail($id);
+            return \View::make('addreview')->with("restaurants", $restaurants);
+        } else {
+            // go back home pls
+            return Redirect::to("home");
+        }
+    }
+
+    public function createReview($id) {
+        // again, fetching id of restaurant cus that's what we want
+       $restaurants = Restaurant::findOrFail($id);
+       $rules = array(
+    		'rating'	=>	'required',
+    		'title'	=>	'required',
+    		'review'	=>	'required',
+    	);
+
+    	// kick off validator instance for our registration page
+    	$validator = Validator::make(Input::all(), $rules);
+
+    	// check to see if the validator fails
+    	if($validator->fails()) {
+    		return Redirect::to('restaurants/'. $restaurants->restaurant_id .'/addreview')
+    			->withErrors($validator)
+    			->withInput();
+    	} else {
+    		// if validator succeeds, add the user to our database and store their credentials
+    		$new_review = new Review;
+            // get the ID of the currently logged in user, so we can associate review
+            $user = Auth::user();
+            $user_id = $user->id;
+
+            $new_review->user_id = Auth::user()->user_id;
+    		$new_review->rating = Input::get("rating");
+    		$new_review->review_tagline = Input::get("title");
+    		$new_review->review = Input::get("review");
+
+            // associate the review with the user and save to db
+    		$new_review->restaurant()->associate($id);
+            $new_review->save();
+
+    		// redirect to the login page, and display account successfully created message
+    		Session::flash("review_created", "Review successfully added");
+    		return Redirect::to("restaurants/$id");
+    	}
+    }
+
+    /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id

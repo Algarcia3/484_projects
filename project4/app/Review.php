@@ -18,7 +18,7 @@ class Review extends Model
     }
 
     public function restaurant() {
-        return $this->hasOne('App\Restaurant', 'restaurant_id');
+        return $this->belongsTo('App\Restaurant', 'restaurant_id');
     }
 
     /**

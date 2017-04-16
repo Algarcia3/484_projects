@@ -22,17 +22,16 @@ Route::resource('restaurants', 'RestaurantsController');
 
 // routes associated with loggin in and out of the application.
 Route::get('login', array('uses' => 'HomeController@showLogin'));
-
 Route::post('login', array('uses' => 'HomeController@performLogin'));
-
 Route::get('logout', array('uses' => 'HomeController@performLogout'));
 
 // routes associated with user creation.
-
 Route::get('register', array('uses' => 'RegistrationController@showRegistration'));
-
 Route::post('register', array('uses' => 'RegistrationController@performRegistration'));
 
 // routes for the main view
-
 Route::get('main', array('uses'	=>	'MainController@showMainPage'));
+
+// routes for the reviews, creation (Restaurants Controller will be handling it)
+Route::get('restaurants/{restaurant}/addreview', 'RestaurantsController@showReview');
+Route::post('restaurants/{restaurant}/addreview', 'RestaurantsController@createReview');

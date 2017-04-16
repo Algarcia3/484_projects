@@ -47,20 +47,8 @@
         <img class=logo-img src="images/coffee.svg" width="30" height="30" class="d-inline-block align-top" alt="">
         <p class=register-text>Register Your Account</p>
 
-        {{-- return error messages --}}
-{{--         @if (Session::has('message'))
-           <div class="alert alert-danger">{{ Session::get('message') }}</div>
-        @endif
-        @if (Session::has('logged_out'))
-           <div class="alert alert-success">{{ Session::get('logged_out') }}</div>
-        @endif --}}
-
+        {{-- form for the registration --}}
         {{ Form::open(array('url' => 'register', 'class' => 'form-signin')) }}
-            {{-- {{ $errors->first('username') }}
-            {{ $errors->first('name') }}
-            {{ $errors->first('email') }}
-            {{ $errors->first('password') }} --}}
-
             @if (count($errors) > 0)
                 @foreach ($errors->all() as $error)
                   <div class="alert alert-danger">{{ $error }}</div>
