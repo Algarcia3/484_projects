@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Hash;
 use Auth;
 use Session;
 use App\User;
+use App\Menu;
 use App\Review;
 use App\Restaurant;
 
@@ -57,15 +58,17 @@ class RestaurantsController extends Controller
      */
     public function show($id)
     {
-        // variables retrieving
+        // get all of the restaurants, reviews, and menu pertaining to selected restaurant
         $restaurants = Restaurant::findOrFail($id);
         $reviews = Review::where('restaurant_id', '=', $id)->get();
+        $menu = Menu::where('restaurant_id', '=', $id)->get();
         // get the avg rating of course
         $avg_rating = $reviews->avg('rating');
         return \View::make('showrestaurant')
                 ->with("restaurants", $restaurants)
                 ->with("reviews", $reviews)
-                ->with("avg_rating", $avg_rating);
+                ->with("avg_rating", $avg_rating)
+                ->with("menu", $menu);
     }
 
     /**

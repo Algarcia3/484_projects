@@ -125,6 +125,18 @@
     <h3>Website</h3>
     <h4>{{ $restaurants->website }}</h4>
     &nbsp;
+    <h3>Menu</h3>
+      @if(count($menu) == 0)
+        <h4>Damn, this restaurant sucks. There aren't even any menu items! :( </h4>
+      @else
+        @foreach($menu as $menu_items)
+          <h4>{{ $menu_items->item_name }}</h4>
+          <h4>{{ $menu_items->menu_description }}</h4>
+          <h4>${{ $menu_items->menu_price }}</h4>
+          &nbsp;
+        @endforeach
+      @endif
+    &nbsp;
     <h3>Reviews</h3>
 
     {{-- output all of the reviews --}}
