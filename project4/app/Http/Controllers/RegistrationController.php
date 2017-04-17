@@ -61,4 +61,52 @@ class RegistrationController extends Controller
     		return Redirect::to("login");
     	}
     }
+
+	public function showPasswordChange() {
+		if(Auth::check()) {
+            return \View::make('changepassword');
+        } else {
+            // go back home pls
+            return Redirect::to("home");
+        }
+	}
+
+	public function performPasswordChange() {
+		// get current id of user signed in
+		$current_user = Auth::user()->user_id;
+
+		// set up validator rules
+		$rules = array(
+			'old_password'	=>	'required',
+			'password'	=>	'required|alphaNum|min:3|confirmed',
+    		'password_confirmation' => 'required|alphaNum|min:3',
+		);
+
+		// start validator
+		$validator = Validator::make(Input::all(), $rules);
+		
+		// perform the pw change
+		if($validator->fails()) {
+    		return Redirect::to('changepassword')
+    			->withErrors($validator)
+    			->withInput(Input::except('old_password','password'));
+		} else {
+			// retrieve the currently logged in user and compare old_password
+			$user = User::findOrFail($current_user);
+			$old_password = Input::get("old_password");
+			
+			// check if the old_password matches their current pass.
+			if(Hash::check($old_password, $user->password)) {
+				$user->password = Hash::make(Input::get('password'));
+				$user->save();
+				Session::flash("password_changed", "Password successfully changed.");
+				return Redirect::to('changepassword');
+			} else {
+				// redirect with error message
+				return Redirect::to('changepassword')->withErrors("Incorrect password.");
+			}
+
+		}
+
+	}
 }

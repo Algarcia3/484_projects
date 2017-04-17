@@ -25,9 +25,11 @@ Route::get('login', array('uses' => 'HomeController@showLogin'));
 Route::post('login', array('uses' => 'HomeController@performLogin'));
 Route::get('logout', array('uses' => 'HomeController@performLogout'));
 
-// routes associated with user creation.
+// routes associated with user creation, modification, etc.
 Route::get('register', array('uses' => 'RegistrationController@showRegistration'));
 Route::post('register', array('uses' => 'RegistrationController@performRegistration'));
+Route::get('changepassword', 'RegistrationController@showPasswordChange');
+Route::post('changepassword', 'RegistrationController@performPasswordChange');
 
 // routes for the main view
 Route::get('main', array('uses'	=>	'MainController@showMainPage'));
