@@ -195,7 +195,26 @@ class RestaurantsController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Show the form for editing the restaurant.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function showEdit($id)
+    {
+        //
+        if(Auth::user() && Auth::user()->isAdmin()) {
+            // display the view for creating new restaurant
+            $restaurants = Restaurant::findOrFail($id);
+            return \View::make('editrestaurant')->with("restaurants", $restaurants);
+        } else {
+            // go back home pls
+            return Redirect::to("main");
+        }
+    }
+
+    /**
+     * actually edit the restaurant info
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -203,6 +222,42 @@ class RestaurantsController extends Controller
     public function edit($id)
     {
         //
+       $restaurants = Restaurant::findOrFail($id);
+       $rules = array(
+    		'restaurant_name'	=>	'required',
+            'street_address'	=>	'required',
+            'city'	=>	'required',
+            'state' => 'required',
+            'website'   =>  'required',
+    	);
+
+    	// kick off validator instance for our registration page
+    	$validator = Validator::make(Input::all(), $rules);
+
+    	// check to see if the validator fails
+    	if($validator->fails()) {
+    		return Redirect::to('restaurants/'. $restaurants->restaurant_id .'/edit')
+    			->withErrors($validator)
+    			->withInput();
+    	} else {
+            // retrieve the currently selected restaurant
+            $edit_restaurant = Restaurant::findOrFail($id);
+
+            // start making changes
+            $edit_restaurant->restaurant_name = Input::get('restaurant_name');
+            $edit_restaurant->street_address = Input::get('street_address');
+            $edit_restaurant->city = Input::get('city');
+            $edit_restaurant->state = Input::get('state');
+            $edit_restaurant->website = Input::get('website');
+
+            // save the changes to the model
+            $edit_restaurant->save();
+
+            // flash the message saying that everything's ok
+            Session::flash("restaurant_edited", "Restaurant successfully edited.");
+            
+            return Redirect::to("restaurants/".$id);
+        }
     }
 
     /**

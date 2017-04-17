@@ -105,8 +105,6 @@ class RegistrationController extends Controller
 				// redirect with error message
 				return Redirect::to('changepassword')->withErrors("Incorrect password.");
 			}
-
 		}
-
 	}
 }

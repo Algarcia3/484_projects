@@ -45,3 +45,7 @@ Route::get('myprofile', 'MainController@myProfile');
 // creation of restaurant
 Route::get('addrestaurant', 'RestaurantsController@showCreate');
 Route::post('addrestaurant', 'RestaurantsController@create');
+
+// editing a restaurant
+Route::get('restaurants/{restaurant}/edit', 'RestaurantsController@showEdit');
+Route::post('restaurants/{restaurant}/edit', 'RestaurantsController@edit');
