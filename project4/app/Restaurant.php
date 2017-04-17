@@ -21,6 +21,10 @@ class Restaurant extends Model
         return $this->hasMany('App\Menu', 'menu_id');
     }
 
+    public function operating_hours() {
+        return $this->hasMany('App\Hours', 'hours_id');
+    }
+
     /**
      * The attributes that are mass assignable.
      *
