@@ -29,7 +29,7 @@ class MainController extends Controller
             return \View::make('myprofile')->with("user_profiles", $user_profiles);
         } else {
             // go back home pls
-            return Redirect::to("home");
+            return Redirect::to("main");
         }
     }
 }

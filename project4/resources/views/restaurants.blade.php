@@ -62,7 +62,6 @@
               <i class="fa fa-comments-o " aria-hidden="true"> 
               </i> 
                 <span style="margin-left:10px;">Admin Panel</span>
-                <span id="spambadge_orders" class="badge spambadge">  
                 </span>
               </a>
           </li>
@@ -94,6 +93,21 @@
 <div id="inbox-section">
 @if(Session::has('message'))
     <div class="alert alert-success" style="width: 50%;">{{ Session::get('message') }}</div>
+@endif
+
+@if(Session::has('restaurant_added'))
+    <div class="alert alert-success" style="width: 50%;">{{ Session::get('restaurant_added') }}</div>
+@endif
+
+@if(Auth::user())
+    @if(Auth::user()->isAdmin())
+    <a href="{{ URL::to('addrestaurant')}}">
+      <button name="review_button" class="btn btn-primary" style="float: right;">
+        <i class="fa fa-plus" aria-hidden="true">
+        </i> Add A Restaurant
+        </button>
+    </a>
+  @endif
 @endif
 
 @foreach ($restaurants as $restaurant)

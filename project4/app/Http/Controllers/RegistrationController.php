@@ -16,7 +16,7 @@ class RegistrationController extends Controller
     //
     public function showRegistration() {
     	if(Auth::check()) {
-            return Redirect::to("home");
+            return Redirect::to("main");
         } else {
             return \View::make('register');
         }
@@ -67,7 +67,7 @@ class RegistrationController extends Controller
             return \View::make('changepassword');
         } else {
             // go back home pls
-            return Redirect::to("home");
+            return Redirect::to("main");
         }
 	}
 

@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Hash;
 use Auth;
 use Session;
 use App\User;
+use App\Hours;
 use App\Menu;
 use App\Review;
 use App\Restaurant;
@@ -34,9 +35,57 @@ class RestaurantsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function showCreate()
+    {
+        if(Auth::user() && Auth::user()->isAdmin()) {
+            // display the view for creating new restaurant
+            return \View::make("addrestaurant");
+        } else {
+            // go back home pls
+            return Redirect::to("main");
+        }
+    }
+
+    /**
+     * actually create the new resource
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function create()
     {
-        //
+        // create the restaurant from the admin panel
+         $rules = array(
+                'restaurant_name'	=>	'required',
+                'street_address'	=>	'required',
+                'city'	=>	'required',
+                'state' => 'required',
+                'website'   =>  'required',
+            );
+
+    	// kick off validator instance for our registration page
+    	$validator = Validator::make(Input::all(), $rules);
+
+        if($validator->fails()) {
+    		return Redirect::to('addrestaurant')
+    			->withErrors($validator)
+    			->withInput();
+    	} else {
+            // new restaurant instance
+            $new_restaurant = new Restaurant;
+            
+            // populate with information from form
+            $new_restaurant->restaurant_name = Input::get('restaurant_name');
+            $new_restaurant->street_address = Input::get('street_address');
+            $new_restaurant->city = Input::get('city');
+            $new_restaurant->state = Input::get('state');
+            $new_restaurant->website = Input::get('website');
+
+            // save the model of the newly created restaurant
+            $new_restaurant->save();
+
+            Session::flash("restaurant_added", "Restaurant successfully added.");
+            return Redirect::to('restaurants');
+        }
     }
 
     /**
@@ -62,13 +111,15 @@ class RestaurantsController extends Controller
         $restaurants = Restaurant::findOrFail($id);
         $reviews = Review::where('restaurant_id', '=', $id)->get();
         $menu = Menu::where('restaurant_id', '=', $id)->get();
+        $hours = Hours::where('restaurant_id', '=', $id)->get();
         // get the avg rating of course
         $avg_rating = $reviews->avg('rating');
         return \View::make('showrestaurant')
                 ->with("restaurants", $restaurants)
                 ->with("reviews", $reviews)
                 ->with("avg_rating", $avg_rating)
-                ->with("menu", $menu);
+                ->with("menu", $menu)
+                ->with("hours", $hours);
     }
 
     /**
@@ -85,7 +136,7 @@ class RestaurantsController extends Controller
             return \View::make('myreviews')->with("reviews", $reviews);
         } else {
             // go back home pls
-            return Redirect::to("home");
+            return Redirect::to("main");
         }
     }
 
@@ -100,7 +151,7 @@ class RestaurantsController extends Controller
             return \View::make('addreview')->with("restaurants", $restaurants);
         } else {
             // go back home pls
-            return Redirect::to("home");
+            return Redirect::to("main");
         }
     }
 

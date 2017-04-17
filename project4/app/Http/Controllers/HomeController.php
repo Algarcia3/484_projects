@@ -14,7 +14,7 @@ class HomeController extends Controller
     // creating the first function for logging in
     public function showLogin() {
         if(Auth::check()) {
-            return Redirect::to("home");
+            return Redirect::to("main");
         } else {
             return \View::make('login');
         }

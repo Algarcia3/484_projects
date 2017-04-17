@@ -36,6 +36,5 @@ class Restaurant extends Model
         'city',
         'state',
         'website',
-        'hours',
     ];
 }

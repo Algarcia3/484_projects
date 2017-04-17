@@ -54,8 +54,6 @@
             <i class="fa fa-comments-o " aria-hidden="true"> 
             </i> 
               <span style="margin-left:10px;">Admin Panel</span>
-              <span id="spambadge_orders" class="badge spambadge">  
-              </span>
             </a>
         </li>
         @elseif(Auth::check())

@@ -41,3 +41,7 @@ Route::get('myreviews', 'RestaurantsController@showMyReviews');
 
 // routes for showing user profile
 Route::get('myprofile', 'MainController@myProfile');
+
+// creation of restaurant
+Route::get('addrestaurant', 'RestaurantsController@showCreate');
+Route::post('addrestaurant', 'RestaurantsController@create');
