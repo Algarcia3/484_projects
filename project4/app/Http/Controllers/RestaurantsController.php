@@ -349,7 +349,7 @@ class RestaurantsController extends Controller
        $restaurants = Restaurant::findOrFail($id);
        $rules = array(
     		'item_name'	=>	'required',
-            'menu_price'	=>	'required',
+            'menu_price'	=>	'required|regex:/^\d*(\.\d{1,2})?$/',
             'menu_description'	=>	'required',
     	);
 

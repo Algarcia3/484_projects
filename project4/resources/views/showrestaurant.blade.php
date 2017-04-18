@@ -21,7 +21,7 @@
   <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
-  <a class="navbar-brand" href="index.php">
+  <a class="navbar-brand" href="{{ URL::to('main') }}">
     <img src="{{asset('images/coffee.svg')}}" width="30" height="30" class="d-inline-block align-top tsar-title" alt="">
     Where To Eat
   </a>
@@ -148,7 +148,11 @@
 
     &nbsp;
     <h2>{{ $restaurants->restaurant_name }}</h2>
-    <h3>Average Rating: {{ $avg_rating }}/5</h3>
+    @if(empty($avg_rating))
+      <h3>Average Rating: No Reviews Yet :(</h3>
+    @else
+      <h3>Average Rating: {{ $avg_rating }}/5</h3>
+    @endif
     &nbsp;
     <h3>Address</h3>
     <h4>{{ $restaurants->street_address }}</h4>

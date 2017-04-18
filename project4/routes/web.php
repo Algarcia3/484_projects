@@ -53,3 +53,6 @@ Route::get('restaurants/{restaurant}/addhours', 'RestaurantsController@showAddHo
 Route::post('restaurants/{restaurant}/addhours', 'RestaurantsController@addHours');
 Route::get('restaurants/{restaurant}/addmenuitem', 'RestaurantsController@showAddMenuItem');
 Route::post('restaurants/{restaurant}/addmenuitem', 'RestaurantsController@addMenuItem');
+
+// routes for the admin panel
+Route::get('admin', 'MainController@adminPanel');
