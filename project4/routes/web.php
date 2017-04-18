@@ -54,5 +54,7 @@ Route::post('restaurants/{restaurant}/addhours', 'RestaurantsController@addHours
 Route::get('restaurants/{restaurant}/addmenuitem', 'RestaurantsController@showAddMenuItem');
 Route::post('restaurants/{restaurant}/addmenuitem', 'RestaurantsController@addMenuItem');
 
-// routes for the admin panel
+// routes for the admin panel, promoting and demoting users.
 Route::get('admin', 'MainController@adminPanel');
+Route::get('demoteuser/{id}', 'MainController@demoteUser');
+Route::get('promoteuser/{id}', 'MainController@promoteUser');

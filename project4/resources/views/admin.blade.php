@@ -40,7 +40,7 @@
   <div id="sidebar-wrapper">
     <ul class="sidebar-nav" style="margin-left:0;">
       <li class="sidebar-brand"></li>
-        <li class="custom-active-state">
+        <li>
             <a href="main"><i class="fa fa-home" aria-hidden="true"> </i> <span style="margin-left:10px;"> Home</span>
             </a>
         </li>
@@ -49,7 +49,7 @@
         </li>
 
         @if(Auth::user()->isAdmin())
-        <li>
+        <li class="custom-active-state">
             <a href="{{ URL::to('admin') }}"> 
             <i class="fa fa-comments-o " aria-hidden="true"> 
             </i> 
@@ -83,8 +83,49 @@
     <div class="alert alert-success" style="width: 45%">{{ Session::get('message') }}</div>
 @endif
 
-<h1>Welcome, {{ Auth::user()->name }}!!!!</h1>
-<h2>Quit fuckin around and start doin stuff yea?!?!?</h2>
+@if(Session::has('demote_success'))
+    <div class="alert alert-success" style="width: 45%">{{ Session::get('demote_success') }}</div>
+@endif
+
+@if(Session::has('promote_success'))
+    <div class="alert alert-success" style="width: 45%">{{ Session::get('promote_success') }}</div>
+@endif
+
+<h1>Admin Panel</h1>
+<table width="400px" class="table table-hover">
+    <thead>
+        <tr>
+            <th>Username</th>
+            <th>E-Mail</th>
+            <th>Display Name</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach($all_users as $users)
+        <tr>
+            <td>{{ $users->name }}</td>
+            <td>{{ $users->email }}</td>
+            <td>{{ $users->username }}</td>
+            @if($users->isAdmin())
+                <td>
+                    <a href="{{ URL::to('demoteuser/'.$users->user_id) }}" class="btn btn-danger" role="button">
+                        <i class="fa fa-arrow-down">
+                        </i> Demote
+                    </a>
+                </td>
+            @else
+                <td>
+                    <a href="{{ URL::to('promoteuser/'.$users->user_id) }}" class="btn btn-success" role="button">
+                        <i class="fa fa-arrow-up">
+                        </i> Promote
+                    </a>
+                </td>
+            @endif
+        </tr>
+        @endforeach
+    </tbody>
+</table>
 
 </div>
 

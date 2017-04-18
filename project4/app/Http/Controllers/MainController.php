@@ -32,4 +32,44 @@ class MainController extends Controller
             return Redirect::to("main");
         }
     }
+
+    public function adminPanel() {
+        if(Auth::user() && Auth::user()->isAdmin()) {
+            $all_users = User::all();
+            return \View::make("admin")->with("all_users", $all_users);
+        } else {
+            return Redirect::to("main");
+        }
+    }
+
+    public function demoteUser($id) {
+        if(Auth::user() && Auth::user()->isAdmin()) {
+            $user = User::findOrFail($id);
+            // since there's only two roles, I decided to ghetto rig it and just do it this way.
+            // I know there's a better way.... but I won't.
+            $user->roles()->detach(1);
+            $user->roles()->attach(2);
+            $user->save();
+            
+            // flash the message that the demotion was successful
+            Session::flash("demote_success", "User has been demoted.");
+            return Redirect::to("admin");
+        }
+    }
+
+    public function promoteUser($id) {
+        // just do the inverse here of the previous function. ez pz
+        if(Auth::user() && Auth::user()->isAdmin()) {
+            $user = User::findOrFail($id);
+            // since there's only two roles, I decided to ghetto rig it and just do it this way.
+            // I know there's a better way.... but I won't.
+            $user->roles()->detach(2);
+            $user->roles()->attach(1);
+            $user->save();
+            
+            // flash the message that the demotion was successful
+            Session::flash("promote_success", "User has been promoted.");
+            return Redirect::to("admin");
+        }
+    }
 }

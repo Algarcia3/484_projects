@@ -26,10 +26,8 @@ class User extends Authenticatable
 
     // permission checking to see if the user is an admin
     public function isAdmin() {
-        foreach ($this->roles()->get() as $role)
-        {
-            if ($role->role == 'Administrator')
-            {
+        foreach ($this->roles()->get() as $role) {
+            if ($role->role == 'Administrator') {
                 return true;
             }
         }
