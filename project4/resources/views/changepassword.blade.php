@@ -60,7 +60,7 @@
         @if(Auth::user())
           @if(Auth::user()->isAdmin())
           <li>
-              <a href="myorders.php"> 
+              <a href="{{ URL::to('admin') }}"> 
               <i class="fa fa-comments-o " aria-hidden="true"> 
               </i> 
                 <span style="margin-left:10px;">Admin Panel</span>
