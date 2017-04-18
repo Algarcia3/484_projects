@@ -14,7 +14,7 @@ class Hours extends Model
 
     // relation to restaurants
     public function restaurant() {
-        return $this->hasOne('App\Restaurant', 'restaurant_id');
+        return $this->belongsTo('App\Restaurant', 'restaurant_id');
     }
 
     /**

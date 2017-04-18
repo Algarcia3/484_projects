@@ -64,6 +64,8 @@
               <i class="fa fa-comments-o " aria-hidden="true"> 
               </i> 
                 <span style="margin-left:10px;">Admin Panel</span>
+                <span id="spambadge_orders" class="badge spambadge">  
+                </span>
               </a>
           </li>
           @endif
@@ -89,104 +91,28 @@
       </ul>
   </div>
 
+
 <!-- main view for inbox -->
 <div id="inbox-section">
 @if(Session::has('message'))
     <div class="alert alert-success" style="width: 50%;">{{ Session::get('message') }}</div>
 @endif
-
-@if(Session::has('review_created'))
-    <div class="alert alert-success" style="width: 50%;">{{ Session::get('review_created') }}</div>
-@endif
-
-@if(Session::has('restaurant_edited'))
-    <div class="alert alert-success" style="width: 50%;">{{ Session::get('restaurant_edited') }}</div>
-@endif
-
-{{-- success message for editing the hours --}}
-@if(Session::has('hours_success'))
-    <div class="alert alert-success" style="width: 50%;">{{ Session::get('hours_success') }}</div>
-@endif
     
-    <h1>Restaurant Details</h1>
+    <h1>Add Hours</h1>
     {{-- button goes here for displaying add review --}}
+    {{ Form::open(array('url' => 'restaurants/' . $restaurants->restaurant_id . '/addhours', 'class' => 'form-signin')) }}
+            @if (count($errors) > 0)
+                @foreach ($errors->all() as $error)
+                  <div class="alert alert-danger" style="width: 500px">{{ $error }}</div>
+                @endforeach
+            @endif
 
-  @if(Auth::user())
-    <a href="{{ URL::to('restaurants/' . $restaurants->restaurant_id . '/addreview')}}">
-      <button name="review_button" class="btn btn-primary" style="float: right;">
-        <i class="fa fa-plus" aria-hidden="true">
-        </i> Write A Review
-        </button>
-    </a>
-  @endif
-
-  @if(Auth::user() && Auth::user()->isAdmin())
-    <a href="{{ URL::to('restaurants/' . $restaurants->restaurant_id . '/edit')}}">
-      <button name="review_button" class="btn btn-primary" style="float: right;">
-        <i class="fa fa-pencil" aria-hidden="true">
-        </i> Edit Restaurant
-        </button>
-    </a>
-    <a href="{{ URL::to('restaurants/' . $restaurants->restaurant_id . '/addhours')}}">
-      <button name="review_button" class="btn btn-primary" style="float: right;">
-        <i class="fa fa-plus" aria-hidden="true">
-        </i> Add Hours
-        </button>
-    </a>
-  @endif
-
-    &nbsp;
-    <h2>{{ $restaurants->restaurant_name }}</h2>
-    <h3>Average Rating: {{ $avg_rating }}/5</h3>
-    &nbsp;
-    <h3>Address</h3>
-    <h4>{{ $restaurants->street_address }}</h4>
-    <h4>{{ $restaurants->city }},</h4>
-    <h4>{{ $restaurants->state }}</h4>
-    &nbsp;
-    <h3>Operating Hours</h3>
-      @if(count($hours) == 0)
-        <h4>Looks like this restaurant is never open. What a shame.</h4>
-      @else
-        @foreach($hours as $hour)
-          <h4>{{ $hour->day }}</h4>
-          <h4>{{ $hour->time_open }} to {{ $hour->time_closed }}</h4>
-        @endforeach
-      @endif
-      &nbsp;
-    <h3>Website</h3>
-    <h4>{{ $restaurants->website }}</h4>
-    &nbsp;
-    <h3>Menu</h3>
-      @if(count($menu) == 0)
-        <h4>Damn, this restaurant sucks. There aren't even any menu items! :( </h4>
-      @else
-        @foreach($menu as $menu_items)
-          <h4>{{ $menu_items->item_name }}</h4>
-          <h4>{{ $menu_items->menu_description }}</h4>
-          <h4>${{ $menu_items->menu_price }}</h4>
-          &nbsp;
-        @endforeach
-      @endif
-    &nbsp;
-    <h3>Reviews</h3>
-
-    {{-- output all of the reviews --}}
-    @if(count($reviews) == 0)
-      <h4>No one has written reviews about this place. :(</h4>
-    @else
-      @foreach($reviews as $review)
-        <h4>{{$review->review_tagline}}</h4>
-        <h5>Review By: {{$review->user->username}}</h5>
-        <h6>Posted: {{ date('F d, Y H:i:s', strtotime($review->created_at)) }}</h6>
-        <h6>Rating: {{ $review->rating }}/5</h6>
-        <h5>{{ $review->review }}</h5>
-        &nbsp;
-      @endforeach
-    @endif
-
-    </br>
-    &nbsp;
+            Day {{ Form::select('day', array("Monday" => "Monday", "Tuesday" => "Tuesday", "Wednesday" => "Wednesday", "Thursday" => "Thursday", "Friday" => "Friday", "Saturday" => "Saturday", "Sunday" => "Sunday"), null, array('class' => 'form-control', 'style' => 'width: 200px')) }}
+            &nbsp;
+            {{ Form::text('time_open', null, array('placeholder'=>'Time Open', 'class'=>'form-control', 'style' => 'width: 500px' ) ) }}
+            {{ Form::text('time_closed', null, array('placeholder'=>'Time Closed', 'class'=>'form-control', 'style' => 'width: 500px' ) ) }}
+            {{ Form::submit('Add Hours', array('class' => 'btn btn-lg btn-primary btn-block btn-signin', 'style' => 'width: 200px')) }}
+    {{ Form::close() }}
 </div>
 </body>
 	<!-- js declarations at the end -->

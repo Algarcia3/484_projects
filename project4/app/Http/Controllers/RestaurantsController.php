@@ -260,6 +260,66 @@ class RestaurantsController extends Controller
         }
     }
 
+     /**
+     * show form to add hours to store location
+     *
+     * @param  int  $id
+     */
+    public function showAddHours($id)
+    {
+        //
+        if(Auth::user() && Auth::user()->isAdmin()) {
+            // display the view for creating new restaurant
+            $restaurants = Restaurant::findOrFail($id);
+            return \View::make("addhours")->with("restaurants", $restaurants);
+        } else {
+            // go back home pls
+            return Redirect::to("main");
+        }
+    }
+
+    /**
+     * actually add the hours into the Hours model
+     *
+     * @param  int  $id
+     */
+    public function addHours($id)
+    {
+        //
+        $restaurants = Restaurant::findOrFail($id);
+       $rules = array(
+    		'day'	=>	'required',
+            'time_open'	=>	'required',
+            'time_closed'	=>	'required',
+    	);
+
+    	// kick off validator instance for our registration page
+    	$validator = Validator::make(Input::all(), $rules);
+
+    	// check to see if the validator fails
+    	if($validator->fails()) {
+    		return Redirect::to('restaurants/'. $restaurants->restaurant_id .'/addhours')
+    			->withErrors($validator)
+    			->withInput();
+    	} else {
+            // create instance with new hours
+            $new_hours = new Hours;
+            $new_hours->day = Input::get("day");
+            $new_hours->time_open = Input::get("time_open");
+            $new_hours->time_closed = Input::get("time_closed");
+
+            // save the new hours and associate to restaurant
+            $new_hours->restaurant()->associate($id);
+            $new_hours->save();
+
+            // flash the message that the add was successful
+            Session::flash("hours_success", "Hours updated successfully.");
+            // return the redirect to the next person
+            return Redirect::to("restaurants/".$id);
+        }
+        
+    }
+
     /**
      * Update the specified resource in storage.
      *

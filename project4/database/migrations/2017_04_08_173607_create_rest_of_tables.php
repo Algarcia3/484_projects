@@ -44,6 +44,7 @@ class CreateRestOfTables extends Migration
             $table->string('item_name');
             $table->text('menu_description');
             $table->decimal('menu_price', 15, 2);
+            $table->timestamps();
         });
 
         // create the hours table
@@ -53,6 +54,7 @@ class CreateRestOfTables extends Migration
             $table->string("day");
             $table->string("time_open");
             $table->string("time_closed");
+            $table->timestamps();
         });
 
         // finally, set all of the foreign key constraints between tables
