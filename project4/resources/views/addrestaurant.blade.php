@@ -52,14 +52,14 @@
             <a href="{{URL::to('main')}}"><i class="fa fa-home" aria-hidden="true"> </i> <span style="margin-left:10px;"> Home</span>
             </a>
         </li>
-        <li class="custom-active-state">
+        <li>
             <a href="{{URL::to('restaurants')}}"><i class="fa fa-cutlery " aria-hidden="true"> </i> <span style="margin-left:10px;"> Restaurants</span>
             </a>
         </li>
 
         @if(Auth::user())
           @if(Auth::user()->isAdmin())
-          <li>
+          <li class="custom-active-state">
               <a href="{{ URL::to('admin') }}"> 
               <i class="fa fa-comments-o " aria-hidden="true"> 
               </i> 

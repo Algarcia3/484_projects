@@ -99,17 +99,6 @@
     <div class="alert alert-success" style="width: 50%;">{{ Session::get('restaurant_added') }}</div>
 @endif
 
-@if(Auth::user())
-    @if(Auth::user()->isAdmin())
-    <a href="{{ URL::to('addrestaurant')}}">
-      <button name="review_button" class="btn btn-primary" style="float: right;">
-        <i class="fa fa-plus" aria-hidden="true">
-        </i> Add A Restaurant
-        </button>
-    </a>
-  @endif
-@endif
-
 @foreach ($restaurants as $restaurant)
     <h1>{{ $restaurant->restaurant_name }}</h1>
     <h4>{{ $restaurant->street_address }}</h4>

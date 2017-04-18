@@ -127,6 +127,17 @@
     </tbody>
 </table>
 
+@if(Auth::user())
+    @if(Auth::user()->isAdmin())
+    <a href="{{ URL::to('addrestaurant')}}">
+      <button name="review_button" class="btn btn-primary">
+        <i class="fa fa-plus" aria-hidden="true">
+        </i> Add A Restaurant
+        </button>
+    </a>
+  @endif
+@endif
+
 </div>
 
 </body>
