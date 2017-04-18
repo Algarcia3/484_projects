@@ -51,3 +51,5 @@ Route::get('restaurants/{restaurant}/edit', 'RestaurantsController@showEdit');
 Route::post('restaurants/{restaurant}/edit', 'RestaurantsController@edit');
 Route::get('restaurants/{restaurant}/addhours', 'RestaurantsController@showAddHours');
 Route::post('restaurants/{restaurant}/addhours', 'RestaurantsController@addHours');
+Route::get('restaurants/{restaurant}/addmenuitem', 'RestaurantsController@showAddMenuItem');
+Route::post('restaurants/{restaurant}/addmenuitem', 'RestaurantsController@addMenuItem');

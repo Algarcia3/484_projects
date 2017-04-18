@@ -13,8 +13,8 @@ class Menu extends Model
     protected $table = "menus";
 
     // return the relation
-    public function reviews() {
-        return $this->hasOne('App\Restaurant', 'restaurant_id');
+    public function restaurant() {
+        return $this->belongsTo('App\Restaurant', 'restaurant_id');
     }
 
     /**

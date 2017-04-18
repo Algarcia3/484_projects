@@ -286,7 +286,7 @@ class RestaurantsController extends Controller
     public function addHours($id)
     {
         //
-        $restaurants = Restaurant::findOrFail($id);
+       $restaurants = Restaurant::findOrFail($id);
        $rules = array(
     		'day'	=>	'required',
             'time_open'	=>	'required',
@@ -318,6 +318,67 @@ class RestaurantsController extends Controller
             return Redirect::to("restaurants/".$id);
         }
         
+    }
+
+    /**
+     * show form to add menu item to the restaurant
+     *
+     * @param  int  $id
+     */
+    public function showAddMenuItem($id)
+    {
+        //
+        if(Auth::user() && Auth::user()->isAdmin()) {
+            // display the view for creating new restaurant
+            $restaurants = Restaurant::findOrFail($id);
+            return \View::make("addmenuitem")->with("restaurants", $restaurants);
+        } else {
+            // go back home pls
+            return Redirect::to("main");
+        }
+    }
+
+    /**
+     * show form to add hours to store location
+     *
+     * @param  int  $id
+     */
+    public function addMenuItem($id)
+    {
+        //
+       $restaurants = Restaurant::findOrFail($id);
+       $rules = array(
+    		'item_name'	=>	'required',
+            'menu_price'	=>	'required',
+            'menu_description'	=>	'required',
+    	);
+
+    	// kick off validator instance for our registration page
+    	$validator = Validator::make(Input::all(), $rules);
+
+    	// check to see if the validator fails
+    	if($validator->fails()) {
+    		return Redirect::to('restaurants/'. $restaurants->restaurant_id .'/addmenuitem')
+    			->withErrors($validator)
+    			->withInput();
+    	} else {
+            // kick off menu model
+            $new_menu = new Menu;
+            
+            // start adding input to the model
+            $new_menu->item_name = Input::get("item_name");
+            $new_menu->menu_price = Input::get("menu_price");
+            $new_menu->menu_description = Input::get("menu_description");
+            
+            // associate this with the restaurant we're adding them to
+            $new_menu->restaurant()->associate($id);
+            $new_menu->save();
+
+            // flash the message that the add was successful
+            Session::flash("menu_success", " Menu item added.");
+            // return the redirect to the next person
+            return Redirect::to("restaurants/".$id);
+        }
     }
 
     /**
