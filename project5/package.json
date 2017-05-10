@@ -1,0 +1,9 @@
+{
+  "name": "networked-poker",
+  "version": "0.0.1",
+  "description": "networked poker game for comp 484.",
+  "main": "server.js",
+  "dependencies": {
+    "express": "^4.15.2"
+  }
+}
