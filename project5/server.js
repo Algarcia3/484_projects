@@ -3,9 +3,10 @@ var app = require('express')();
 var express = require('express');
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
-var players = 0;
+var playerCounter = 0;
 
-app.use(express.static(__dirname + 'js/'));
+// include the path for express to find
+app.use("/js", express.static(__dirname + '/js'));
 
 // define the express routes; I normally have a separate file for this but this application is going to be small in terms of size and stuff
 
@@ -22,5 +23,7 @@ http.listen(8080, function() {
 // start up the necessary socket io items. necessary server side calculations will go here.
 
 io.on('connection', function(socket) {
-    console.log("user has connected to the channel");
+    socket.on('connect', function() { 
+        console.log("Player ");
+    });
 });
