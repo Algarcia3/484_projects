@@ -23,7 +23,13 @@ http.listen(8080, function() {
 // start up the necessary socket io items. necessary server side calculations will go here.
 
 io.on('connection', function(socket) {
-    socket.on('connect', function() { 
-        console.log("Player ");
+
+// increment the counter whenever a player joins a game.
+    playerCounter++;
+    socket.emit("totalPlayerCount", playerCounter);
+    console.log("Player " + playerCounter + " has joined the game. (S)");
+    socket.on("disconnect", function() {
+        console.log("Player " + playerCounter + " has disconnected from the game. (S)");
+        playerCounter--;
     });
 });
