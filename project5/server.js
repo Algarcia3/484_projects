@@ -4,6 +4,7 @@ var express = require('express');
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var playerCounter = 0;
+var users = {};
 
 // include the path for express to find
 app.use("/js", express.static(__dirname + '/js'));
@@ -20,16 +21,16 @@ http.listen(8080, function() {
     console.log("Application started on port: 8080");
 });
 
-// start up the necessary socket io items. necessary server side calculations will go here.
 
-io.on('connection', function(socket) {
-
-// increment the counter whenever a player joins a game.
-    playerCounter++;
-    socket.emit("totalPlayerCount", playerCounter);
-    console.log("Player " + playerCounter + " has joined the game. (S)");
-    socket.on("disconnect", function() {
-        console.log("Player " + playerCounter + " has disconnected from the game. (S)");
-        playerCounter--;
-    });
+// handle when a player connects and disconnects.
+io.sockets.on('connection', function (socket) {
+  playerCounter++;
+  users[client.id] = playerCounter;
+  console.log("Player " + playerCounter + " has joined the game.");
+  io.sockets.emit('users_count', playerCounter);
+  socket.on('disconnect', function () {
+    delete users[client.id];
+    console.log("Player " + playerCounter + " has disconnected from the game.");
+    playerCounter--;
+  });
 });
