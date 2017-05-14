@@ -39,7 +39,7 @@ io.sockets.on('connection', function (socket) {
 
   // if the total amount of players is greater than 1, allow game to start
   if(playerCounter > 1) {
-    io.sockets.emit("begin_game", "Player Found!");
+    io.sockets.emit("begin_game", "Player Ready");
   }
 
 });
