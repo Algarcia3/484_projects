@@ -7,6 +7,7 @@ var playerCounter = 0;
 
 // include the path for express to find
 app.use("/js", express.static(__dirname + '/js'));
+app.use("/img", express.static(__dirname + '/img'));
 
 // define the express routes; I normally have a separate file for this but this application is going to be small in terms of size and stuff
 
@@ -28,7 +29,8 @@ io.sockets.on('connection', function (socket) {
   socket.player = playerCounter + 1;
   playerCounter++;
   console.log("Player " + playerCounter + " has joined the game. With an ID of: " + socket.player);
-  io.sockets.emit('users_count', socket.player);
+  // only emit the player ID to the respective player. global broadcast means everyone gets the same ID!
+  socket.emit('users_count', socket.player);
 
   // on disconnect, decrement player counter.
   socket.on('disconnect', function () {
@@ -41,5 +43,9 @@ io.sockets.on('connection', function (socket) {
   if(playerCounter > 1) {
     io.sockets.emit("begin_game", "Player Ready");
   }
+
+  socket.on("start_game", function(data) {
+    io.sockets.emit("initiate_game", "Initiating Game...");
+  });
 
 });

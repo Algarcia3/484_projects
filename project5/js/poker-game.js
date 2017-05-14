@@ -30,10 +30,13 @@ socket.on('connect', function(){
             var el = document.getElementById("poker-table-p" + i);
             el.innerHTML = data;
         }
-
-        // if player one, change the button to allow game to start.
-        document.getElementById("start_game").innerHTML = '<a id="ready_button" href="#" class="btn btn-success btn-lg active" role="button" aria-pressed="true">Start Game</a>';
         
+        // if player one, change the button to allow game to start.
+        document.getElementById("start_game").innerHTML = '<a id="ready_button" class="btn btn-success btn-lg active" role="button" aria-pressed="true">Start Game</a>';
+        $("#ready_button").click(function() {
+            // talk to the server and get response back to start the game.
+            socket.emit("start_game", "Game is now starting.");
+        });
     });
 
     // if the player disconnects, display that they disconnected like a little bitch
@@ -50,5 +53,10 @@ socket.on('connect', function(){
         setTimeout(function() { 
             player_el.innerHTML = "Searching For Player...";
         }, 3000);
+    });
+
+    // when the game actually begins
+    socket.on('initiate_game', function() {
+        $("#ready_button").html("FUCKIN BITCH");
     });
 });
