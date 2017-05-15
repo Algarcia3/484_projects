@@ -6,10 +6,15 @@
 
 // declare what host they're connection to. For these purposes, we'll use localhost
 var socket = io.connect("localhost:8080");
-var countdown;
-var timer = 5;
 
-// handle the connections as they are users connect
+// these are the variables for our cards, in their orders. not worrying about jokers
+var card_suits = ["S","H","C","D"];
+var card_numbers = ["A","2","3","4","5","6","7","8","9","10","J","Q","K"];
+var cards = [];
+var card_counter = 0;
+
+
+/***** all of the socket IO stuff will be handled up here. *****/
 
 socket.on('connect', function(){
     // connect the player to their own table.
@@ -45,7 +50,8 @@ socket.on('connect', function(){
 
         // enable the button if there is only one player in the lobby.
         if(playerNumber - 1 < 2) {
-            $('start_game').html('<a id="ready_button" class="btn btn-danger btn-lg disabled" role="button" aria-pressed="true">Not Enough Players</a>');
+            console.log(playerNumber);
+            document.getElementById("start_game").innerHTML = '<a id="ready_button" class="btn btn-danger btn-lg disabled" role="button" aria-pressed="true">Not Enough Players</a>';
         }
         
         // show the searching for player prompt 3 secs after player disconnects
@@ -66,7 +72,61 @@ socket.on('connect', function(){
         
         // clear the tables of the "player ready" text
         for(var i = 0; i <= totalPlayers; i++) {
-            $("#poker-table-p" + i).empty();
+            $("#poker-table-p" + i).html("");
         }
+        generateCards(socket.player);
     });
 });
+
+/***** all of the poker logic stuff will be handled down here. *****/
+
+function generateCards(player_num) {
+    // define all of the order and vars
+    var card_order = [];
+        card_counter = 0;
+        cards = [];
+
+        // generate all of the suits
+        for(suits in card_suits) {
+            var c_suit = card_suits[suits];
+
+            // generate all of the numbers
+            for(numbers in card_numbers) {
+                var c_nums = card_numbers[numbers];
+                var card = {
+                    suit: c_suit,
+                    number: c_nums,
+                    // making sure that we are not exceeding 52 cards, not worrying about jokers.
+                    order: Math.floor(Math.random() * 5200) + 1
+                };
+                // push the card after we've gotten its suit and its number...
+                cards.push(card);
+            }
+        }
+        // 
+        cards = cards.sort(function(a,b) {
+            return (a.order < b.order ? -1 : 1)
+        });
+
+        // actually display the cards, over to the user.
+        for(var i = 0; i < 5; i++) {
+            card_counter++;
+            displayCards(i, player_num);
+        }
+        // select a card from the deck, make sure they're getting 52 cards!!!!
+            // if(count < 52) {
+            //     // display cards to that specific player.
+            //     displayCards(count, player_num);
+            //     count++;
+            // }
+            // return false;
+}
+
+// function outputs all of the cards
+function displayCards(card_num, player_num) {
+    var i = card_num
+    var count = card_num + 1;
+    var card = cards[i];
+ 	// $("#poker-table-p" + player_num).append(count + " - " + card.number + card.suit + "<br/>"); 
+    $("#poker-table-p" + player_num).append('<span style="font-size: 175%;" id="card-'+count+'" class="label label-info">'+ card.number + card.suit +'</span> &nbsp');
+}
