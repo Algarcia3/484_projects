@@ -6,7 +6,6 @@
 
 // declare what host they're connection to. For these purposes, we'll use localhost
 var socket = io.connect("localhost:8080");
-var playerCounter = 0;
 var countdown;
 var timer = 5;
 
@@ -25,10 +24,10 @@ socket.on('connect', function(){
     });
 
     // if user count exceeds 1, start the game.
-    socket.on('begin_game', function(data) {
-        for(var i = 2; i <= socket.player; i++) {
+    socket.on('begin_game', function(playerCounter) {
+        for(var i = 2; i <= playerCounter; i++) {
             var el = document.getElementById("poker-table-p" + i);
-            el.innerHTML = data;
+            el.innerHTML = "Player Ready";
         }
         
         // if player one, change the button to allow game to start.
@@ -57,6 +56,7 @@ socket.on('connect', function(){
 
     // when the game actually begins
     socket.on('initiate_game', function() {
-        $("#ready_button").html("FUCKIN BITCH");
+        // start the game here... show the deck of cards and all that shit
+        $("#ready_button").remove();
     });
 });
