@@ -45,7 +45,7 @@ io.sockets.on('connection', function (socket) {
   }
 
   socket.on("start_game", function(data) {
-    io.sockets.emit("initiate_game", "Initiating Game...");
+    io.sockets.emit("initiate_game", playerCounter);
   });
   
 });
