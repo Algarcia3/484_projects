@@ -76,7 +76,7 @@ socket.on('connect', function(){
         }
 
         // call functions for game, card generation, rounds, reveal, etc. 
-        generateCards(socket.player, totalPlayers);
+        generateCards();
         startRounds(socket.player, totalPlayers);
     });
 });
@@ -146,6 +146,6 @@ function displayCards(card_num, player_num, player_count) {
 function startRounds(playerNum, playerCount) {
     // handling first 2 rounds here.
     for(var i = 1; i <= playerCount; i++) {
-        
+
     }
 }
