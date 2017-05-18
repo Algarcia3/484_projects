@@ -74,13 +74,17 @@ socket.on('connect', function(){
         for(var i = 0; i <= totalPlayers; i++) {
             $("#poker-table-p" + i).html("");
         }
-        generateCards(socket.player);
+
+        // call functions for game, card generation, rounds, reveal, etc. 
+        generateCards(socket.player, totalPlayers);
+        startRounds(socket.player, totalPlayers);
     });
 });
 
-/***** all of the poker logic stuff will be handled down here. *****/
+/***** all of the poker logic stuff will be handled down here. 
+       If I hadn't been a lazy ass, I would have thought this through more and made it OOP. *****/
 
-function generateCards(player_num) {
+function generateCards(player_num, playerCounter) {
     // define all of the order and vars
     var card_order = [];
         card_counter = 0;
@@ -111,7 +115,7 @@ function generateCards(player_num) {
         // actually display the cards, over to the user.
         for(var i = 0; i < 5; i++) {
             card_counter++;
-            displayCards(i, player_num);
+            displayCards(i, player_num, playerCounter);
         }
         // select a card from the deck, make sure they're getting 52 cards!!!!
             // if(count < 52) {
@@ -123,10 +127,25 @@ function generateCards(player_num) {
 }
 
 // function outputs all of the cards
-function displayCards(card_num, player_num) {
+function displayCards(card_num, player_num, player_count) {
     var i = card_num
     var count = card_num + 1;
     var card = cards[i];
  	// $("#poker-table-p" + player_num).append(count + " - " + card.number + card.suit + "<br/>"); 
+    //  display the cards on the player side.
     $("#poker-table-p" + player_num).append('<span style="font-size: 175%;" id="card-'+count+'" class="label label-info">'+ card.number + card.suit +'</span> &nbsp');
+
+    // display the face down cards for the other players.
+    for(var num = 1; num <= player_count; num++) {
+        if(num != player_num) {
+            $("#poker-table-p" + num).append('<span style="font-size: 175%;" id="card-'+count+'" class="label label-info"><i class="fa fa-glass" aria-hidden="true"></i></span> &nbsp');
+        }
+    }
+}
+
+function startRounds(playerNum, playerCount) {
+    // handling first 2 rounds here.
+    for(var i = 1; i <= playerCount; i++) {
+        
+    }
 }
