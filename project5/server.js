@@ -47,5 +47,9 @@ io.sockets.on('connection', function (socket) {
   socket.on("start_game", function(data) {
     io.sockets.emit("initiate_game", playerCounter);
   });
+
+  socket.on("start_round", function(data) {
+      io.sockets.emit("next_round", data);
+  });
   
 });

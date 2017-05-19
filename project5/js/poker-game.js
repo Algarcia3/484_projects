@@ -76,9 +76,29 @@ socket.on('connect', function(){
         }
 
         // call functions for game, card generation, rounds, reveal, etc. 
-        generateCards();
-        startRounds(socket.player, totalPlayers);
+        generateCards(socket.player, totalPlayers);
+
+        // start off with the first player
+        socket.emit("start_round", {player_num: socket.player, total_players: totalPlayers, player_turn: 1, total_rounds: 1});
     });
+
+    socket.on('next_round', function(data) {
+    // var total_rounds = 1;
+    
+        if(data["player_num"] <= data["total_players"]) {
+            $("#draw-p" + socket.player).html('<a id="draw_button" class="btn btn-lg active" role="button" aria-pressed="true">Draw</a>');
+        } else {
+            console.log("reveal round time!!!");
+        }
+         $("#draw-p" + data["player_num"]).click(function() {
+            // talk to the server and get response back to start the game.
+            $("#draw-p" + data["player_num"]).remove();
+            data["player_turn"]++;
+            data["player_num"]++;
+            socket.emit("start_round", {player_num: data["player_num"], total_players: data["total_players"], player_turn: data["player_turn"], total_rounds: data["total_rounds"]});
+        });
+    });
+
 });
 
 /***** all of the poker logic stuff will be handled down here. 
@@ -134,18 +154,10 @@ function displayCards(card_num, player_num, player_count) {
  	// $("#poker-table-p" + player_num).append(count + " - " + card.number + card.suit + "<br/>"); 
     //  display the cards on the player side.
     $("#poker-table-p" + player_num).append('<span style="font-size: 175%;" id="card-'+count+'" class="label label-info">'+ card.number + card.suit +'</span> &nbsp');
-
     // display the face down cards for the other players.
     for(var num = 1; num <= player_count; num++) {
         if(num != player_num) {
             $("#poker-table-p" + num).append('<span style="font-size: 175%;" id="card-'+count+'" class="label label-info"><i class="fa fa-glass" aria-hidden="true"></i></span> &nbsp');
         }
-    }
-}
-
-function startRounds(playerNum, playerCount) {
-    // handling first 2 rounds here.
-    for(var i = 1; i <= playerCount; i++) {
-
     }
 }
