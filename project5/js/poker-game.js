@@ -24,8 +24,6 @@ socket.on('connect', function(){
 
         // fuck it. anyone can start the game. i dont care anymore
         document.getElementById("start_game").innerHTML = '<a id="ready_button" href="#" class="btn btn-danger btn-lg disabled" role="button" aria-pressed="true">Not Enough Players</a>';
-        console.log("total players client side: " + data);
-        console.log("Your ID is: " + socket.player);
     });
 
     // if user count exceeds 1, start the game.
@@ -79,18 +77,19 @@ socket.on('connect', function(){
         generateCards(socket.player, totalPlayers, 5);
 
         // start off with the first player
-        socket.emit("start_round", {player_num: socket.player, total_players: totalPlayers, player_turn: 1, total_rounds: 1});
+        socket.emit("start_round", {player_num: socket.player, total_players: totalPlayers, player_turn: 0, total_rounds: 1});
     });
 
     socket.on('next_round', function(data) {
-    // var total_rounds = 1;
-    
-        if(socket.player <= data["player_num"]) {
+        ++data["player_turn"];
+        if(socket.player <= data["player_num"] && data["player_num"] <= data["player_turn"]) {
+            console.log("Player ID: " + socket.player);
+            console.log("Player Turn: " + data["player_turn"]);
             $("#draw-p" + socket.player).html('<a id="draw_button" class="btn btn-lg active" role="button" aria-pressed="true">Draw</a>');
             $('#poker-table-p' + socket.player).children().on('click', function (e) {
                 // toggle, SIP prevents the click being registered as a double click
                 e.stopImmediatePropagation();
-                if(!$(this).hasClass( "red-bg" )) {
+                if(!$(this).hasClass("red-bg")) {
                     $(this).addClass("red-bg");
                 } else {
                     $(this).removeClass("red-bg");
@@ -111,10 +110,10 @@ socket.on('connect', function(){
             // remove the present cards and draw new ones
             $('#poker-table-p' + socket.player + " .red-bg").remove();
 
-            data["player_turn"]++;
+            // increment twice to offset.
             data["player_num"]++;
-            console.log("Player Num: " + data["player_num"]);
-            console.log("Player Total: " + data["total_players"]);
+            data["player_turn"]++;
+            data["player_turn"]++;
             if(data["player_num"] <= data["total_players"]) {
                 socket.emit("start_round", {player_num: data["player_num"], total_players: data["total_players"], player_turn: data["player_turn"], total_rounds: data["total_rounds"]});
             } else {
@@ -126,6 +125,7 @@ socket.on('connect', function(){
     });
 
     socket.on("winner", function(data) {
+        // my really shit logic for determining a winner... I could have totally done this right if I didn't underestimate the difficulty of this project.
         $("#poker-table-p" + data["winner"]).html("WINNER!");
         $("#score-p" + data["winner"]).html('<p>100</p>');
     });
@@ -177,7 +177,6 @@ function displayCards(card_num, player_num, player_count) {
     var i = card_num;
     var count = card_num + 1;
     var card = cards[i];
-    console.log(i);
     //  display the cards on the player side.
     $("#poker-table-p" + player_num).append('<span style="font-size: 175%;" id="card-'+count+'" class="label label-info white">'+ card.number + card.suit +'</span> ');
     // display the face down cards for the other players.
