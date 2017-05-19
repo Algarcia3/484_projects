@@ -87,6 +87,16 @@ socket.on('connect', function(){
     
         if(data["player_num"] <= data["total_players"]) {
             $("#draw-p" + socket.player).html('<a id="draw_button" class="btn btn-lg active" role="button" aria-pressed="true">Draw</a>');
+            $('#poker-table-p' + socket.player).children().on('click', function (event) {
+                // $(this).addClass("red");
+                if($(this).hasClass("white")) {
+                    $(this).removeAttr("white");
+                    $(this).addClass("red");
+                } else if($(this).hasClass("red")) {
+                    $(this).removeAttr("red");
+                    $(this).addClass("white");
+                }
+            });
         } else {
             console.log("reveal round time!!!");
         }
@@ -153,7 +163,7 @@ function displayCards(card_num, player_num, player_count) {
     var card = cards[i];
  	// $("#poker-table-p" + player_num).append(count + " - " + card.number + card.suit + "<br/>"); 
     //  display the cards on the player side.
-    $("#poker-table-p" + player_num).append('<span style="font-size: 175%;" id="card-'+count+'" class="label label-info">'+ card.number + card.suit +'</span> &nbsp');
+    $("#poker-table-p" + player_num).append('<span style="font-size: 175%;" id="card-'+count+'" class="label label-info white">'+ card.number + card.suit +'</span> &nbsp');
     // display the face down cards for the other players.
     for(var num = 1; num <= player_count; num++) {
         if(num != player_num) {
